@@ -20,22 +20,24 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
-            <a href="klasifikasi-mesin/create" class="btn btn-primary btn-sm mb-3"><i class="bi bi-plus"></i> Tambah Data Kategori</a>
-
+            <a href="klasifikasi-mesin/create" class="btn mb-3 btn-primary btn-icon-split btn-sm" data-toggle="modal" data-target="#tambahDataModal">Tambah Data</a>
             <div class="row px-3 py-3">
                 <div class="col-lg-12">
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover" id="datatable">
                             <thead>
                                 <tr>
+                                    <th>No.</th>
                                     <th>Nama Klasifikasi</th>
                                     <th>Kode Klasifikasi</th>
                                     <th>Ubah</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($post as $kategori)
+
+                                @foreach ($post->sortBy('nama_kategori') as $kategori)
                                 <tr>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $kategori->nama_klasifikasi }}</td>
                                     <td>{{ $kategori->kode_klasifikasi }}</td>
                                     <td>
@@ -52,27 +54,9 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-center">
-                {{ $post->links() }}
-            </div>
+
         </div>
     </div>
 </div>
-
-<!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#datatable').DataTable({
-            "order": [
-                [1, 'asc']
-            ], // Mengurutkan kolom No.Registrasi secara default
-            "searching": true // Mengaktifkan pencarian
-        });
-    });
-</script>
-
 @include('sweetalert::alert')
 @endsection

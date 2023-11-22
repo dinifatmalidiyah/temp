@@ -1,4 +1,4 @@
-@extends('layout.main2')
+@extends('layouts.template')
 @section('title', 'Daftar Mesin')
 @section('content')
 <div class="page-content">
@@ -39,7 +39,7 @@
                                         <th>Nama</th>
                                         <th>Dari Tanggal</th>
                                         <th>Ke Tanggal</th>
-                                        <th>Keterangan</th>
+                                        <th>Kerusakan</th>
                                         <th width="10%">Aksi</th>
                                     </tr>
                                 </thead>
@@ -102,7 +102,7 @@
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label for="keterangan">Keterangan</label>
+                                                            <label for="keterangan">Analisis Kerusakan</label>
                                                             <textarea name="keterangan" class="form-control" id="keterangan" cols="10" rows="3" required></textarea>
                                                         </div>
 
@@ -153,7 +153,7 @@
                                         <th>Nama</th>
                                         <th>Dari Tanggal</th>
                                         <th>Ke Tanggal</th>
-                                        <th>Keterangan</th>
+                                        <th>kerusakan</th>
                                         <th width="10%">Aksi</th>
                                     </tr>
                                 </thead>
@@ -200,7 +200,7 @@
                     <thead>
                         <tr>
                             <th>Status</th>
-                            <th>Keterangan</th>
+                            <th>Analisis Kerusakan</th>
                         </tr>
                     </thead>
                     <tbody>

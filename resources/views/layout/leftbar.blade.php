@@ -96,13 +96,13 @@
                 <div class="collapse" id="sidebarPerbaikan">
                     <ul class="side-nav-second-level">
                         <li>
-                            <a href="#">Permintaan</a>
+                            <a href="/pengajuan">Pengajuan</a>
                         </li>
                         <li>
                             <a href="#">Status</a>
                         </li>
                         <li>
-                            <a href="#">Laporan</a>
+                            <a href="/laporan-perbaikan">Laporan</a>
                         </li>
                         <li>
                             <a href="#">History Perbaikan</a>

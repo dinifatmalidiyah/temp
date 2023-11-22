@@ -28,7 +28,7 @@ class WorkshopController extends Controller
             'data_kategoris' => $kategori,
 
             //FUNGSI LATEST UNTUK MENAMPILKAN BERDASARKAN DATA PALING AKHIR DI INPUT
-            'post' => Workshop::orderBy('nama_workshop', 'asc')->paginate(10)
+            'post' => Workshop::orderBy('nama_workshop', 'asc')->paginate(800)
 
 
         ]);

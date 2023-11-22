@@ -101,6 +101,19 @@
     <!-- demo app -->
     <script src="/assets/js/pages/demo.dashboard.js"></script>
     <!-- end demo js-->
+    <script>
+        $(document).ready(function() {
+            $('#datatable').DataTable({
+                "order": [
+                    [1, 'asc']
+                ], // Mengurutkan kolom No.Registrasi secara default
+                "searching": true // Mengaktifkan pencarian
+            });
+            $('#datatable1').DataTable({
+                "searching": true // Mengaktifkan pencarian
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -72,7 +72,7 @@
             </div>
             <div class="card-footer">
                 <a class="btn btn-success" href="/spesifikasi-mesin">Kembali</a>
-                <a class="btn btn-success" href="/pengajuan">Pengajuan</a>
+                <a class="btn btn-success" href="/pengajuan1">Pengajuan</a>
             </div>
         </div>
     </div>

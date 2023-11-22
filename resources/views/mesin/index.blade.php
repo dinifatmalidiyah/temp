@@ -141,18 +141,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     </body>
-    <script>
-        $(document).ready(function() {
-            $('#datatable').DataTable({
-                "order": [
-                    [1, 'asc']
-                ], // Mengurutkan kolom No.Registrasi secara default
-                "searching": true // Mengaktifkan pencarian
-            });
-        });
-    </script>
-
-
     <style>
         /* Custom styles for all modals */
         .modal {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KategoriMesin;
 use App\Models\KlasMesin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -17,21 +18,19 @@ class KlasMesinController extends Controller
      */
     public function index()
     {
-        //FUNGSI ELOQUENT MENAMPILKAN DATA MENGGUNAKAN PAGINATION
-        $kategori = $kategori = DB::table('klasmesin')->get();
+        // Fetch all data from the 'kategorimesin' table
+        $data_kategoris = KategoriMesin::all();
 
-        //MENGGAMBIL SEMUA ISI TABEL
-        $post = KlasMesin::latest();
+        // Fetch all data from the 'klasmesin' table, ordered by 'nama_klasifikasi'
+        $post = KlasMesin::orderBy('nama_klasifikasi', 'asc')->latest()->paginate(500);
 
-        //ADD PAGINATION
+        // Pass the data to the view
         return view('klasmesin.index', [
-            'data_kategoris' => $kategori,
-
-            //FUNGSI LATEST UNTUK MENAMPILKAN BERDASARKAN DATA PALING AKHIR DI INPUT
-            'post' => KlasMesin::latest()->paginate(4)
-
+            'data_kategoris' => $data_kategoris,
+            'post' => $post,
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -41,7 +40,8 @@ class KlasMesinController extends Controller
     public function create()
     {
         return view('klasmesin.create', [
-            'klasmesin' => KlasMesin::all()
+            'klasmesin' => KlasMesin::all(),
+            'kategorimesin' => KategoriMesin::all(),
         ]);
     }
 
@@ -56,6 +56,7 @@ class KlasMesinController extends Controller
         $cek = $request->validate([
             'nama_klasifikasi' => 'required',
             'kode_klasifikasi' => 'required',
+            'kategorimesin_id' => 'required',
         ]);
 
         KlasMesin::create($cek);

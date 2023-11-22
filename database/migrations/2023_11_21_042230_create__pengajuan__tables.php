@@ -20,6 +20,8 @@ class CreatePengajuanTables extends Migration
             $table->string('ke_tanggal');
             $table->string('keterangan');
             $table->string('st_pengajuan');
+            $table->string('nama_ws');
+            $table->string('nama_alatmesink3');
             $table->timestamps();
         });
     }

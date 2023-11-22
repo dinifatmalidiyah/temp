@@ -18,7 +18,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
-            <a href="/data-k/create" class="btn mb-3 btn-primary btn-icon-split btn-sm">Tambah Data Kategori</a>
+            <a href="/lokasi-workshop-mesin/create" class="btn mb-3 btn-primary btn-icon-split btn-sm">Tambah Data Kategori</a>
             <!--
       <a href="/kategori-mesin/printpdf" class="btn mb-3 btn-success btn-icon-split btn-sm">Print Kategori Mesin</a>
       -->

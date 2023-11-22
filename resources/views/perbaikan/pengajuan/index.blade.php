@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                    <h4 class="mb-0 font-size-18">List Pengajuan erbaikan</h4>
+                    <h4 class="mb-0 font-size-18">List Pengajuan Perbaikan</h4>
                 </div>
             </div>
         </div>
@@ -45,9 +45,12 @@
                                 <thead>
                                     <tr>
                                         <th width="5%">No</th>
-                                        <th>Dari Tanggal</th>
-                                        <th>Ke Tanggal</th>
-                                        <th>Keterangan</th>
+                                        <th>Tanggal</th>
+                                        <th>Nama Pemohon</th>
+                                        <th>Workshop</th>
+                                        <th>Nama Alat/Mesin/K3</th>
+                                        <th>Permintaan Selesai diperbaiki </th>
+                                        <th>Kerusakan</th>
                                         <th>Status</th>
                                         <th width="15%">Aksi</th>
                                     </tr>
@@ -57,8 +60,11 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ date('d-m-Y', strtotime($row->dari_tanggal)) }}</td>
-                                        <td>{{ date('d-m-Y', strtotime($row->ke_tanggal)) }}</td>
+                                        <td>{{ $row->user->nama }}</td>
+                                        <td>{{ $row->nama_ws }}</td>
                                         <td>{{ $row->keterangan }}</td>
+                                        <td>{{ $row->nama }}</td>
+                                        <td>{{ $row->nama }}</td>
                                         <td>
                                             @if ($row->st_pengajuan == 'R')
                                             <span class="badge badge-warning">Pengajuan</span>
@@ -102,7 +108,7 @@
                     <thead>
                         <tr>
                             <th>Status</th>
-                            <th>Keterangan</th>
+                            <th>Analisis Kerusakan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -124,17 +130,52 @@
                         @endforeach
                     </tbody>
                 </table>
+
+                <!-- Tombol untuk Membuka Modal Feedback -->
+                @if (!empty($histori->where('pengajuan_id', $row->id)->first()->keterangan))
+                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#feedbackModal{{ $row->id }}">
+                    Berikan Feedback
+                </button>
+                @else
+                <button class="btn btn-primary" type="button" disabled>
+                    Berikan Feedback
+                </button>
+                @endif
+
+                <!-- Modal Feedback -->
+                <div class="modal fade" id="feedbackModal{{ $row->id }}" tabindex="-1" role="dialog" aria-labelledby="feedbackModalLabel{{ $row->id }}" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="feedbackModalLabel{{ $row->id }}">Berikan Feedback</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Isi Modal Feedback (Keterangan) -->
+                                <textarea class="form-control" rows="4" placeholder="Isi keterangan atau pesan feedback Anda di sini..."></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                <!-- Tombol untuk Mengirim Feedback (Anda dapat menambahkan aksi di sini) -->
+                                <button type="button" class="btn btn-primary">Kirim</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 @endforeach
 
 <div class="modal fade" id="modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Tambah Pengajuan</h4>
+                <h4 class="modal-title">Pengajuan Perbaikan</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -142,7 +183,7 @@
             <div class="modal-body">
                 <form action="{{ route('pengajuan.store') }}" method="POST">
                     @csrf
-
+                    <!--
                     <div class="form-group">
                         <label for="dari_tanggal">Dari Tanggal</label>
                         <input type="date" class="form-control" id="dari_tanggal" name="dari_tanggal" required>
@@ -154,8 +195,36 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="ke_tanggal">Keterangan</label>
+                        <label for="ke_tanggal">Kerusakan</label>
                         <textarea name="keterangan" class="form-control" id="keterangan" cols="10" rows="3"></textarea>
+                    </div>
+-->
+
+                    <div class="form-group">
+                        <label for="dari_tanggal">Tanggal</label>
+                        <input type="date" class="form-control" id="dari_tanggal" name="dari_tanggal" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ke_tanggal">Nama pemohon</label>
+                        <input type="text" class="form-control" id="user_id" name="user_id" value="{{ auth()->check() ? auth()->user()->nama : '' }}" required disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ke_tanggal">Workshop</label>
+                        <input type="text" class="form-control" id="nama_ws" name="nama_ws" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ke_tanggal">Nama Alat/Mesin/K3</label>
+                        <input type="text" class="form-control" id="ke_tanggal" name="ke_tanggal" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ke_tanggal">Kerusakan</label>
+                        <textarea name="keterangan" class="form-control" id="keterangan" cols="10" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="ke_tanggal">Permintaan Selesai diperbaiki</label>
+                        <input type="text" class="form-control" id="nama_alatmesink3" name="nama_alatmesink3" required>
                     </div>
 
                     <div class="modal-footer">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pengajuan;
 use App\Models\Validasi;
+use App\Models\Workshop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -47,6 +48,8 @@ class PengajuanController extends Controller
             'ke_tanggal' => $request->ke_tanggal,
             'keterangan' => $request->keterangan,
             'st_pengajuan' => 'R',
+            'nama_ws' => $request->nama_ws, // Assuming you have a field named 'nama_ws'
+            'nama_alatmesink3' => $request->nama_alatmesink3, // Add this line with the correct field name
         ]);
 
         Validasi::create([
@@ -54,6 +57,8 @@ class PengajuanController extends Controller
             'pengajuan_id' => $id->id,
             'action_to_do' => 'R',
             'keterangan' => '',
+            'nama_ws' => $request->nama_ws, // Assuming you have a field named 'nama_ws'
+            'nama_alatmesink3' => $request->nama_alatmesink3, // Add this line with the correct field name
         ]);
 
         return redirect()->route('pengajuan.index')->with('success', 'Pengajuan Berhasil Ditambahkan');
@@ -89,5 +94,13 @@ class PengajuanController extends Controller
     public function destroy(Pengajuan $pengajuan)
     {
         //
+    }
+    /**
+     * Retrieve workshops from the Workshop model.
+     */
+    public function Workshop()
+    {
+        $workshops = Workshop::all();
+        return $workshops;
     }
 }

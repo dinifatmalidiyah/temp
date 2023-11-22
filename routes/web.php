@@ -37,6 +37,7 @@ use App\Http\Controllers\SearchController;
 use App\Models\DataMesin;
 use PhpOffice\PhpSpreadsheet\Calculation\TextData\Search;
 use App\Http\Controllers\DropDownController;
+use App\Http\Controllers\LaporanPerbaikanController;
 use App\Http\Controllers\PermintaanController;
 use App\Models\Workshop;
 
@@ -124,12 +125,17 @@ Route::resource('/spesifikasi-mesin', PerbaikanController::class);
 Route::resource('/pengajuan1', PermintaanController::class)->middleware('auth');
 
 Route::resource('pengajuan', PengajuanController::class);
-Route::resource('/validasi', ValidasiController::class);
+Route::resource('/validasi', ValidasiController::class)->middleware(['auth', 'isAdmin']);
 
+/*LAPORAN*/
+Route::resource('/laporan-perbaikan', LaporanPerbaikanController::class)->middleware('auth');
 
 Route::get('/status', [StatusController::class, 'index']);
 Route::get('/perbaikan', [PerbaikanController::class, 'index']);
 Route::resource('/perbaikan', PerbaikanController::class);
+
+
+
 
 
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
