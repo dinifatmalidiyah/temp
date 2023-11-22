@@ -129,41 +129,38 @@
     </div>
 </div>
 <script>
+
     window.addEventListener('load', function() {
-        var kodeKategori = $('#single-select-field').find(':selected').attr('data-kode-kategori');
-        var idCountry = $('#single-select-field').find(':selected').data('id');
-        $("#single-select-field2").html('');
+            var kodeKategori = $('#single-select-field').find(':selected').attr('data-kode-kategori');
+            var idCountry = $('#single-select-field').find(':selected').data('id');
+            $("#single-select-field2").html('');
 
-        $.ajax({
-            url: "{{url('api/getklasmesin')}}",
-            type: "POST",
-            data: {
-                kategorimesin_id: idCountry,
-                _token: '{{csrf_token()}}'
-            },
-            dataType: 'json',
-            success: function(result) {
-                $('#single-select-field2').html('<option value="">-- Select Klasifikasi --</option>');
-                $.each(result.klasmesin, function(key, value) {
-                    // Pastikan atribut data-kode-klasifikasi ada dan terisi dengan benar
-                    var kodeKlasifikasi = value.kode_klasifikasi ? value.kode_klasifikasi : '';
-                    if ({
-                            {
-                                $datamesin - > klas_mesin
-                            }
-                        } == value.id) {
-                        $("#single-select-field2").append('<option selected value="' + value.id + '" data-kode-klasifikasi="' + kodeKlasifikasi + '">' + value.nama_klasifikasi + '</option>');
-                    } else {
-                        $("#single-select-field2").append('<option value="' + value.id + '" data-kode-klasifikasi="' + kodeKlasifikasi + '">' + value.nama_klasifikasi + '</option>');
-                    }
+            $.ajax({
+                url: "{{url('api/getklasmesin')}}",
+                type: "POST",
+                data: {
+                    kategorimesin_id: idCountry,
+                    _token: '{{csrf_token()}}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $('#single-select-field2').html('<option value="">-- Select Klasifikasi --</option>');
+                    $.each(result.klasmesin, function(key, value) {
+                        // Pastikan atribut data-kode-klasifikasi ada dan terisi dengan benar
+                        var kodeKlasifikasi = value.kode_klasifikasi ? value.kode_klasifikasi : '';
+                        if({{ $datamesin->klas_mesin }} == value.id) {
+                            $("#single-select-field2").append('<option selected value="' + value.id + '" data-kode-klasifikasi="' + kodeKlasifikasi + '">' + value.nama_klasifikasi + '</option>');
+                        } else {
+                            $("#single-select-field2").append('<option value="' + value.id + '" data-kode-klasifikasi="' + kodeKlasifikasi + '">' + value.nama_klasifikasi + '</option>');
+                        }
 
-                });
+                    });
 
-                // Panggil fungsi getLatestID saat dropdown klasifikasi berubah
-                getLatestID();
-            }
+                    // Panggil fungsi getLatestID saat dropdown klasifikasi berubah
+                    getLatestID();
+                }
+            });
         });
-    });
     $(document).ready(function() {
         $('#single-select-field').select2();
         $('#single-select-field2').select2();
@@ -224,7 +221,7 @@
             var nomorUrutInt = parseInt(nomorUrutString, 10);
 
             if (current.nama_kategori == x) {
-                var nextNomorUrutInt = nomorUrutInt + 1;
+                var nextNomorUrutInt = nomorUrutInt+1;
             } else {
                 var nextNomorUrutInt = nomorUrutInt + 1;
             }

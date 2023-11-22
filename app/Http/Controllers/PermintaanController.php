@@ -10,8 +10,4 @@ class PermintaanController extends Controller
     {
         return view('perbaikan.permintaan.index');
     }
-    public function status()
-    {
-        return view('perbaikan.status.index');
-    }
 }

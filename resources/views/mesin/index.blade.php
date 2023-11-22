@@ -64,7 +64,7 @@
                                         @method('DELETE')
                                         <button onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini? ')" class="btn btn-danger"><i class="bi bi-trash"></i></button>
                                     </form>
-                                    <a class="btn btn-info" href="/qrcode/{{ $mesin->nama_mesin }}" style="display: inline-block; padding: 5px; background-color: #ECEE81; margin-left: -6px; ">
+                                    <a class="btn btn-info" href="/qrcode/{{ $mesin->kode_jenis }}" style="display: inline-block; padding: 5px; background-color: #ECEE81; margin-left: -6px; ">
                                         <img src="{{ asset('assets/icon/qrcode-solid.svg') }}" alt="Lihat" style="width: 34px; height: 27px;">
                                     </a>
                                 </div>

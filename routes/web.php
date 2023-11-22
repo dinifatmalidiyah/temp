@@ -38,8 +38,13 @@ use App\Models\DataMesin;
 use PhpOffice\PhpSpreadsheet\Calculation\TextData\Search;
 use App\Http\Controllers\DropDownController;
 use App\Http\Controllers\PermintaanController;
-use App\Http\Controllers\SpekPublicController;
 use App\Models\Workshop;
+
+
+
+
+use App\Http\Controllers\PengajuanController;
+use App\Http\Controllers\ValidasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,7 +82,6 @@ Route::post('file-import', [MesinImportEksportController::class, 'DataMesinImpor
 Route::get('file-export', [MesinImportEksportController::class, 'DataMesinExport'])->name('file-export');
 /*DATA MESIN */
 
-Route::get('qrcode-generate/{id}', [QRCodeController::class, 'qrcodeView'])->name('qrcode-generate');
 Route::resource('/data-mesin', DataMesinController::class)->middleware('auth', 'isAdmin');
 // Add a route group for admin-only routes
 Route::middleware(['auth', 'isAdmin'])->group(function () {
@@ -111,19 +115,21 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 /*TIDAK BISA DIAKSES*/
 Route::get('/tidak-memilki-akses', [NoAksesController::class, 'index']);
 
+/*DATA PUBLIC*/
+Route::get('/qrcode/{kode_jenis}', [QRCodeController::class, 'showQRCode'])->name('qrcode.show');
+Route::get('/qrcode/hasil/{kode_jenis}', [QRCodeController::class, 'showResult'])->name('qrcode.result');
+Route::resource('/spesifikasi-mesin', PerbaikanController::class);
 
-Route::get('/qrcode/{id}', [QRCodeController::class, 'index']);
+/*PENGAJUAN*/
+Route::resource('/pengajuan1', PermintaanController::class)->middleware('auth');
+
+Route::resource('pengajuan', PengajuanController::class);
+Route::resource('/validasi', ValidasiController::class);
+
 
 Route::get('/status', [StatusController::class, 'index']);
 Route::get('/perbaikan', [PerbaikanController::class, 'index']);
 Route::resource('/perbaikan', PerbaikanController::class);
-
-/*Public*/
-Route::resource('/spek-public', SpekPublicController::class);
-
-/*PERBAIKAN*/
-Route::resource('/pp', PermintaanController::class);
-Route::resource('/perbaikan/status-perbaikan', PermintaanController::class);
 
 
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth');

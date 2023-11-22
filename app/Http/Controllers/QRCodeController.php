@@ -10,28 +10,31 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class QRCodeController extends Controller
 {
 
-    public function qrcodeView($id)
+    public function showQRCode($kode_jenis)
     {
-        $datamesin = DataMesin::where('id', $id)->first();
-        return view('mesin.qrcode-detail', compact('datamesin'));
-    }
+        // Mengambil data mesin berdasarkan kode jenis
+        $mesin = DataMesin::where('kode_jenis', $kode_jenis)->first();
 
-    public function index($nama_mesin)
-    {
-        // Mengambil data buku berdasarkan ID
-        $mesin = DB::table('datamesin')->where('nama_mesin', $nama_mesin)->first();
-
-        // Periksa apakah data buku ditemukan
+        // Periksa apakah data mesin ditemukan
         if (!$mesin) {
-            abort(404); // Munculkan halaman 404 jika data buku tidak ditemukan
+            abort(404); // Munculkan halaman 404 jika data mesin tidak ditemukan
         }
 
-        // Menghasilkan URL QR Code dengan ID data buku
-        $qrCode = QrCode::size(200)->generate(route('qrcode-generate', ['id' => $mesin->kode_jenis]));
+        // URL untuk /qrcode/hasil/{kode_jenis}
+        $resultUrl = route('qrcode.result', ['kode_jenis' => $mesin->kode_jenis]);
+
+        // Menyimpan URL dalam QR Code
+        $qrCode = QrCode::size(200)->generate($resultUrl);
 
         return view('qrcode.index', [
             'qrCode' => $qrCode, // Mengirim QR Code ke view
-            'mesin' => $mesin, // Mengirim data buku ke view
+            'mesin' => $mesin, // Mengirim data mesin ke view
         ]);
+    }
+
+    public function showResult($kode_jenis)
+    {
+        $datamesin = DataMesin::where('kode_jenis', $kode_jenis)->first();
+        return view('perbaikan.spekpublik.detail', compact('datamesin'));
     }
 }
