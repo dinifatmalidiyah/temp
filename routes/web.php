@@ -37,6 +37,7 @@ use App\Http\Controllers\SearchController;
 use App\Models\DataMesin;
 use PhpOffice\PhpSpreadsheet\Calculation\TextData\Search;
 use App\Http\Controllers\DropDownController;
+use App\Http\Controllers\LandingPublicController;
 use App\Http\Controllers\LaporanPerbaikanController;
 use App\Http\Controllers\PermintaanController;
 use App\Models\Workshop;
@@ -121,6 +122,9 @@ Route::get('/qrcode/{kode_jenis}', [QRCodeController::class, 'showQRCode'])->nam
 Route::get('/qrcode/hasil/{kode_jenis}', [QRCodeController::class, 'showResult'])->name('qrcode.result');
 Route::resource('/spesifikasi-mesin', PerbaikanController::class);
 
+/*qrcode*/
+Route::get('/generate-qr-code/{code}', [QRCodeController::class, 'generateQRCode'])->name('qrcode.generate');
+
 /*PENGAJUAN*/
 Route::resource('/pengajuan1', PermintaanController::class)->middleware('auth');
 
@@ -134,11 +138,14 @@ Route::get('/status', [StatusController::class, 'index']);
 Route::get('/perbaikan', [PerbaikanController::class, 'index']);
 Route::resource('/perbaikan', PerbaikanController::class);
 
+/*LANDING*/
+Route::resource('/landing', LandingPublicController::class);
+Route::get('/qr-scan', [LandingPublicController::class, 'showQrCodeScanner']);
+Route::get('/po', [LandingPublicController::class, 'datamesin'])->name('datamesin');
 
-
-
-
+/*DASHBOAD*/
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
+
 Route::get('/pegawai/pdf', [DataAnggotaController::class, 'cetak_pdf'])->middleware(['auth', 'isAdmin']);
 Route::resource('/pegawai', DataAnggotaController::class)->middleware('auth', 'isAdmin');
 Route::resource('/datapetugas', UserController::class)->middleware(['auth', 'isAdmin']);

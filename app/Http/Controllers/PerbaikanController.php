@@ -24,7 +24,7 @@ class PerbaikanController extends Controller
             ->orderBy('nama_kategori', 'asc')
             ->get();
 
-        return view('perbaikan.spekpublik.index', [
+        return view('perbaikan.spekpublik.detail', [
             'datamesin' => $dataMesin
         ]);
     }

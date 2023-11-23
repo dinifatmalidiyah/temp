@@ -35,6 +35,14 @@ class QRCodeController extends Controller
     public function showResult($kode_jenis)
     {
         $datamesin = DataMesin::where('kode_jenis', $kode_jenis)->first();
-        return view('perbaikan.spekpublik.detail', compact('datamesin'));
+        return view('landingpublic.index', compact('datamesin'));
+    }
+    public function generateQRCode($code)
+    {
+        // Membuat QR Code berdasarkan kode yang didapat dari hasil scan
+        $qrCode = QrCode::size(300)->generate($code);
+
+        // Menampilkan QR Code dalam bentuk gambar
+        return response($qrCode)->header('Content-type', 'image/png');
     }
 }
