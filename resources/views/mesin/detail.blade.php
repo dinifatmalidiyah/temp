@@ -25,8 +25,12 @@
                                 <td>{{ $datamesin->kode_jenis }}</td>
                             </tr>
                             <tr>
+                                <td class="text-primary">Kategori Mesin</td>
+                                <td>{{$datamesin->kategori->nama_kategori}}</td>
+                            </tr>
+                            <tr>
                                 <td class="text-primary">Klasifikasi Mesin</td>
-                                <td>{{$datamesin->klas_mesin}}</td>
+                                <td>{{$datamesin->klasifikasi->nama_klasifikasi}}</td>
                             </tr>
                             <tr>
                                 <td class="text-primary">Nama Mesin</td>

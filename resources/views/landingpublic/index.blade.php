@@ -23,7 +23,9 @@
                     <div class="image-content">
                         <span class="overlay"></span>
                         <div class="card-image">
-                            <img src="{{ asset('assets/images/logodhj.jpg') }}" alt="" class="card-img">
+                            <a data-fancybox="gallery" href="{{ asset('storage/'.$datamesin->gambar_mesin) }}">
+                                <img src="{{ asset('storage/'.$datamesin->gambar_mesin) }}" class="card-image" style="max-width: 100%; height: 100%;">
+                            </a>
                         </div>
                     </div>
                     <div class="card-content">
@@ -68,8 +70,12 @@
                                     <td>{{ $datamesin->kode_jenis }}</td>
                                 </tr>
                                 <tr>
+                                    <td class="text-primary">Kategori Mesin</td>
+                                    <td>{{$datamesin->kategori->nama_kategori}}</td>
+                                </tr>
+                                <tr>
                                     <td class="text-primary">Klasifikasi Mesin</td>
-                                    <td>{{$datamesin->klas_mesin}}</td>
+                                    <td>{{$datamesin->klasifikasi->nama_klasifikasi}}</td>
                                 </tr>
                                 <tr>
                                     <td class="text-primary">Nama Mesin</td>
