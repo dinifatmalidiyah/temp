@@ -14,18 +14,6 @@
         {{ Session::get('berhasil') }}
     </div>
     @endif
-    <div class="row justify-content-start">
-        <div class="col-6">
-            <a href="/data-mesin/create" class="btn btn-primary btn-icon-split btn-sm mb-3" id="addRowButton">Tambah Data Mesin</a>
-
-            <!--
-            <a href="/data-mesin/printpdf" class="btn btn-success btn-icon-split btn-sm mb-3">Print Data Mesin</a>
-            -->
-            <button type="button" class="btn btn-success btn-icon-split btn-sm mb-3" data-toggle="modal" data-target="#importModal">IMPORT</button>
-            <a href="{{ route('file-export') }}" class="btn btn-success btn-icon-split btn-sm mb-3">EXPORT</a>
-
-        </div>
-    </div>
     <div class="row px-3 py-3">
         <div class="col-lg-12">
             <div class="table-responsive">
@@ -51,7 +39,8 @@
                         @foreach ($datamesin as $mesin)
                         <tr>
                             <td>
-
+                                @auth
+                                @if(auth()->user()->level=='Admin')
                                 <a class="btn btn-info" href="/data-mesin/{{ $mesin->id }}"><i class="bi bi-eye"></i></a>
                                 <a class="btn btn-primary" href="/data-mesin/{{ $mesin->id }}/edit"><i class="bi bi-pencil-square"></i></a>
                                 <div style="display: flex; align-items: center;">
@@ -62,8 +51,15 @@
                                         <img src="{{ asset('assets/icon/qrcode-solid.svg') }}" alt="Lihat" style="width: 34px; height: 27px;">
                                     </a>
                                 </div>
+                                @endif
+                                <div style="display: flex; align-items: center;">
+                                    <a class="btn btn-info" href="/data-mesin/{{ $mesin->id }}"><i class="bi bi-eye"></i></a>
+                                    <a class="btn btn-info" href="/qrcode/{{ $mesin->kode_jenis }}" style="display: inline-block; padding: 5px; background-color: #ECEE81; margin-left: 3px; ">
+                                        <img src="{{ asset('assets/icon/qrcode-solid.svg') }}" alt="Lihat" style="width: 34px; height: 27px;">
+                                    </a>
+                                </div>
+                                @endauth
                             </td>
-
                             <!-- Modal Hapus -->
                             <div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">

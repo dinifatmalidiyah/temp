@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Departemen;
+use App\Models\Plant;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Workshop;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -91,11 +94,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($nama)
     {
-        $cek = User::where('id', $id)->first();
+        $cek = User::where('nama', $nama)->first();
         return view('petugas.edit', [
             'users' => $cek,
+            'plant' => Plant::all(),
+            'departemen' => Departemen::all()
         ]);
     }
 
@@ -116,6 +121,8 @@ class UserController extends Controller
             'email' => 'required',
             'password' => 'nullable|min:6', // Kata sandi menjadi opsional dan minimal 6 karakter
             'level' => 'required',
+            'nama_plant' => "required",
+            'nama_departemen' => 'required',
             'tanggal_join' => 'required',
         ];
 

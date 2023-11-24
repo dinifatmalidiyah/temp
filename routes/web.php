@@ -24,6 +24,7 @@ use App\Http\Controllers\StatusController;
 use App\Http\Controllers\PerbaikanController;
 use App\Models\Perbaikan;
 use App\Http\Controllers\DataMesinController;
+use App\Http\Controllers\DepartemenController;
 use App\Http\Controllers\MesinImportEksportController;
 use App\Http\Controllers\PopupDataMesinController;
 use App\Models\KlasMesin;
@@ -45,8 +46,11 @@ use App\Models\Workshop;
 
 
 
+
 use App\Http\Controllers\PengajuanController;
+use App\Http\Controllers\PlantController;
 use App\Http\Controllers\ValidasiController;
+use App\Imports\DepartemenImport;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,14 +86,13 @@ Route::get('/search', [SearchController::class, 'search'])->name('search');
 Route::get('file-import-export', [MesinImportEksportController::class, 'ImportExport']);
 Route::post('file-import', [MesinImportEksportController::class, 'DataMesinImport'])->name('file-import');
 Route::get('file-export', [MesinImportEksportController::class, 'DataMesinExport'])->name('file-export');
+
+Route::post('/import-departemen', 'DepartemenController@import')->name('import.departemen');
+
 /*DATA MESIN */
 
 Route::resource('/data-mesin', DataMesinController::class)->middleware('auth', 'isAdmin');
-// Add a route group for admin-only routes
-Route::middleware(['auth', 'isAdmin'])->group(function () {
-    Route::resource('data-mesin', DataMesinController::class)
-        ->only(['edit', 'destroy']);
-});
+
 
 /*WORKSHOP*/
 Route::resource('/lokasi-workshop-mesin', WorkshopController::class);
@@ -113,6 +116,11 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::resource('/kategori-mesin', KategoriMesinController::class)
         ->only(['edit', 'destroy']);
 });
+
+/*DEPARTEMEN*/
+Route::resource('/departemen', DepartemenController::class);
+/*PLANT*/
+Route::resource('plant', PlantController::class);
 
 /*TIDAK BISA DIAKSES*/
 Route::get('/tidak-memilki-akses', [NoAksesController::class, 'index']);
@@ -141,7 +149,11 @@ Route::resource('/perbaikan', PerbaikanController::class);
 /*LANDING*/
 Route::resource('/landing', LandingPublicController::class);
 Route::get('/qr-scan', [LandingPublicController::class, 'showQrCodeScanner']);
-Route::get('/po', [LandingPublicController::class, 'datamesin'])->name('datamesin');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/po', [LandingPublicController::class, 'datamesin'])->name('datamesin');
+});
+
 
 /*DASHBOAD*/
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth');

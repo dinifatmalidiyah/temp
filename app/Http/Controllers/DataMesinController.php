@@ -157,6 +157,7 @@ class DataMesinController extends Controller
             'spek_min' => 'required',
             'pabrik' => 'required',
             'tahun_mesin' => 'required',
+            'kapasitas' => '',
             'lok_ws' => 'required',
             'gambar_mesin' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Ubah aturan validasi untuk gambar
         ];

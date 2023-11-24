@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Spesifikasi {{$datamesin->nama_mesin}}</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -29,13 +29,20 @@
                         </div>
                     </div>
                     <div class="card-content">
-                        <h2 class="name">MAINTENANCE</h2>
-                        <p class="description">Deskripsi</p>
-                        <button id="spek" class="button">Spesifikasi</button>
-                        <button id="laporan" class="button">Laporan</button>
-                        <button class="button">History mesin</button>
-                        <div class="footer">
-                            <p>&copy; 2023 Maintenance. All Rights Reserved.</p>
+                        <div class="card-title">
+                            <h2 class="description">{{$datamesin->lok_ws}}</h2>
+                            <p class="spek">{{$datamesin->nama_mesin}}</p>
+                        </div>
+                        <div class="card-details">
+                            <div class="detail-item">
+                                <button id="spek" class="button">Spesifikasi Mesin</button>
+                            </div>
+                            <div class="detail-item">
+                                <button id="laporan" class="button">Laporan Perbaikan</button>
+                            </div>
+                            <div class="detail-item">
+                                <button class="button">History Perbaikan</button>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -27,9 +27,9 @@
                         <h2 class="name">MAINTENANCE</h2>
                         <p class="description">Deskripsi</p>
 
-                        <button id="spek" class="button">Spesifikasi</button>
-                        <button id="laporan" class="button">Laporan</button>
-                        <button class="button">History mesin</button>
+                        <button id="spek" class="button">Spesifikasi Mesin</button>
+                        <button id="laporan" class="button">Laporan Perbaikan</button>
+                        <button class="button">History Perbaikan</button>
                         <div class="footer">
                             <p>&copy; 2023 Maintenance. All Rights Reserved.</p>
                         </div>
