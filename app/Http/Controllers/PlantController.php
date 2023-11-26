@@ -135,4 +135,10 @@ class PlantController extends Controller
 
         return back()->with('success', 'Data imported successfully!');
     }
+    public function reset()
+    {
+        // Hapus semua data departemen
+        Plant::truncate();
+        return redirect()->route('plant.index')->with('success', 'Data plant berhasil di-reset.');
+    }
 }

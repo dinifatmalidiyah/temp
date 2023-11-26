@@ -123,16 +123,20 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 });
 
 /*DEPARTEMEN*/
-Route::resource('/departemen', DepartemenController::class);
+Route::resource('/departemen', DepartemenController::class)->middleware('isAdmin');
 /*EXPORT DAN IMPORT*/
 Route::get('/departemen-export-excel', [DepartemenController::class, 'export'])->name('export');
 Route::post('departemen-import-excel', [DepartemenController::class, 'import'])->name('import');
+/*RESET DATA*/
+Route::post('/departemen/reset', [DepartemenController::class, 'reset'])->name('departemen.reset');
 
 /*PLANT*/
-Route::resource('plant', PlantController::class);
+Route::resource('plant', PlantController::class)->middleware('isAdmin');
 /*EXPORT DAN IMPORT*/
 Route::get('/plant-export-excel', [PlantController::class, 'export'])->name('export');
 Route::post('plant-import-excel', [PlantController::class, 'import'])->name('import');
+/*RESET DATA*/
+Route::post('/plant/reset', [PlantController::class, 'reset'])->name('plant.reset');
 
 /*TIDAK BISA DIAKSES*/
 Route::get('/tidak-memiki-izin', [NoAksesController::class, 'index']);

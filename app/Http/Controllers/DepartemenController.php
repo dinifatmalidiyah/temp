@@ -22,7 +22,7 @@ class DepartemenController extends Controller
         $departemen = $departemen = DB::table('departemen')->get();
 
         //MENGGAMBIL SEMUA ISI TABEL
-        $post = Departemen::orderBy('nama_departemen', 'asc')->paginate();
+        $post = Departemen::orderBy('nama_departemen', 'asc')->paginate(10);
 
         //ADD PAGINATION
         return view('departemen.index', [
@@ -134,5 +134,11 @@ class DepartemenController extends Controller
         Excel::import(new DepartemenImport, request()->file('file'));
 
         return back()->with('success', 'Data imported successfully!');
+    }
+    public function reset()
+    {
+        // Hapus semua data departemen
+        Departemen::truncate();
+        return redirect()->route('departemen.index')->with('success', 'Data departemen berhasil di-reset.');
     }
 }

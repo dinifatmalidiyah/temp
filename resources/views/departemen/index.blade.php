@@ -21,6 +21,7 @@
             <a href="/departemen/create" class="btn mb-3 btn-primary btn-icon-split btn-sm">Tambah Data Departemen</a>
             <button type="button" class="btn btn-success btn-icon-split btn-sm mb-3" data-toggle="modal" data-target="#importModal">IMPORT</button>
             <a href="/departemen-export-excel" class="btn btn-success btn-icon-split btn-sm mb-3">EXPORT</a>
+            <button type="button" class="btn btn-success btn btn-danger btn-sm mb-3" data-toggle="modal" data-target="#resetModal">RESET</button>
             <!--
       <a href="/kategori-mesin/printpdf" class="btn mb-3 btn-success btn-icon-split btn-sm">Print Kategori Mesin</a>
       -->
@@ -111,6 +112,31 @@
                         <button type="submit" class="btn btn-primary">Import data</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Reset -->
+    <div class="modal fade" id="resetModal" tabindex="-1" role="dialog" aria-labelledby="resetModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="hapusModalLabel">Konfirmasi Hapus</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda yakin ingin reset data ini?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <!-- Form Hapus -->
+                    <form action="{{ route('departemen.reset') }}" method="post" style="margin-right: 10px;">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Reset Data</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
