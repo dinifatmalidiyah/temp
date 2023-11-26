@@ -51,6 +51,11 @@ use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\PlantController;
 use App\Http\Controllers\ValidasiController;
 use App\Imports\DepartemenImport;
+use App\Exports\DepartemenExport;
+use App\Exports\PlantExport;
+use App\Imports\PlantImport;
+use App\Models\Departemen;
+use App\Models\Plant;
 
 /*
 |--------------------------------------------------------------------------
@@ -119,11 +124,18 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
 /*DEPARTEMEN*/
 Route::resource('/departemen', DepartemenController::class);
+/*EXPORT DAN IMPORT*/
+Route::get('/departemen-export-excel', [DepartemenController::class, 'export'])->name('export');
+Route::post('departemen-import-excel', [DepartemenController::class, 'import'])->name('import');
+
 /*PLANT*/
 Route::resource('plant', PlantController::class);
+/*EXPORT DAN IMPORT*/
+Route::get('/plant-export-excel', [PlantController::class, 'export'])->name('export');
+Route::post('plant-import-excel', [PlantController::class, 'import'])->name('import');
 
 /*TIDAK BISA DIAKSES*/
-Route::get('/tidak-memilki-akses', [NoAksesController::class, 'index']);
+Route::get('/tidak-memiki-izin', [NoAksesController::class, 'index']);
 
 /*DATA PUBLIC*/
 Route::get('/qrcode/{kode_jenis}', [QRCodeController::class, 'showQRCode'])->name('qrcode.show');

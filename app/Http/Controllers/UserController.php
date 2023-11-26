@@ -121,8 +121,8 @@ class UserController extends Controller
             'email' => 'required',
             'password' => 'nullable|min:6', // Kata sandi menjadi opsional dan minimal 6 karakter
             'level' => 'required',
-            'nama_plant' => "required",
-            'nama_departemen' => 'required',
+            'nama_plant' => '',
+            'nama_departemen' => '',
             'tanggal_join' => 'required',
         ];
 

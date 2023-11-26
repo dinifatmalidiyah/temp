@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\PlantImport;
+use App\Exports\PlantExport;
 use App\Models\Plant;
-use App\Models\Workshop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PlantController extends Controller
 {
@@ -116,5 +118,21 @@ class PlantController extends Controller
     {
         Plant::destroy($id);
         return redirect('/plant')->with('success', 'Plant  Berhasil Dihapus!');
+    }
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function export()
+    {
+        return Excel::download(new PlantExport, 'plant.xlsx');
+    }
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function import()
+    {
+        Excel::import(new PlantImport, request()->file('file'));
+
+        return back()->with('success', 'Data imported successfully!');
     }
 }

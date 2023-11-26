@@ -54,6 +54,8 @@
 
                                 <div class="mb-3 mb-0 text-center">
                                     <button class="btn btn-primary" type="submit"> Log In </button>
+                                    <a href="/register" class="btn btn-primary"> Register</a>
+
                                 </div>
 
                             </form>

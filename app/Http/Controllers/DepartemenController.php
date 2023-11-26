@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Imports\DepartemenImport;
+use App\Exports\DepartemenExport;
 use App\Models\Departemen;
-use App\Models\Plant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\DataMesinImport;
 
 class DepartemenController extends Controller
 {
@@ -20,17 +19,17 @@ class DepartemenController extends Controller
     public function index()
     {
         //FUNGSI ELOQUENT MENAMPILKAN DATA MENGGUNAKAN PAGINATION
-        $departemen = $departemen = DB::table('plant')->get();
+        $departemen = $departemen = DB::table('departemen')->get();
 
         //MENGGAMBIL SEMUA ISI TABEL
-        $post = Departemen::orderBy('nama_departemen', 'asc')->paginate(10);
+        $post = Departemen::orderBy('nama_departemen', 'asc')->paginate();
 
         //ADD PAGINATION
         return view('departemen.index', [
             'data_departemen' => $departemen,
 
             //FUNGSI LATEST UNTUK MENAMPILKAN BERDASARKAN DATA PALING AKHIR DI INPUT
-            'post' => Departemen::orderBy('nama_departemen', 'asc')->paginate(800)
+            'post' => Departemen::orderBy('nama_departemen', 'asc')->paginate(100)
 
 
         ]);
@@ -44,7 +43,7 @@ class DepartemenController extends Controller
     public function create()
     {
         return view('departemen.create', [
-            'plant' => Departemen::all()
+            'departemen' => Departemen::all()
         ]);
     }
 
@@ -120,14 +119,20 @@ class DepartemenController extends Controller
         Departemen::destroy($id);
         return redirect('/departemen')->with('success', 'Departemen  Berhasil Dihapus!');
     }
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function export()
+    {
+        return Excel::download(new DepartemenExport, 'departemen.xlsx');
+    }
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public function import()
     {
-        try {
-            Excel::import(new DepartemenImport, request()->file('file'));
+        Excel::import(new DepartemenImport, request()->file('file'));
 
-            return redirect()->back()->with('success', 'Data Departemen berhasil diimpor.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
-        }
+        return back()->with('success', 'Data imported successfully!');
     }
 }

@@ -19,6 +19,8 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <a href="/plant/create" class="btn mb-3 btn-primary btn-icon-split btn-sm">Tambah Data Plant</a>
+            <button type="button" class="btn btn-success btn-icon-split btn-sm mb-3" data-toggle="modal" data-target="#importModal">IMPORT</button>
+            <a href="/plant-export-excel" class="btn mb-3 btn-primary btn-icon-split btn-sm">EXPORT</a>
             <!--
       <a href="/kategori-mesin/printpdf" class="btn mb-3 btn-success btn-icon-split btn-sm">Print Kategori Mesin</a>
       -->
@@ -89,53 +91,79 @@
         </div>
         <!-- /.container-fluid -->
     </div>
+</div>
+<!-- Import Modal -->
+<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="importModalLabel">Import Data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/plant-import-excel" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="importFile">Choose file</label>
+                        <input type="file" name="file" class="form-control-file" id="importFile">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Import data</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<style>
+    /* Custom styles for all modals */
+    .modal {
+        background: rgba(0, 0, 0, 0.5);
+    }
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <style>
-        /* Custom styles for all modals */
-        .modal {
-            background: rgba(0, 0, 0, 0.5);
-        }
+    .modal-content {
+        background-color: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-        .modal-content {
-            background-color: #ffffff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+    .modal-header {
+        background-color: #007bff;
+        color: #ffffff;
+        border-bottom: 1px solid #dee2e6;
+    }
 
-        .modal-header {
-            background-color: #007bff;
-            color: #ffffff;
-            border-bottom: 1px solid #dee2e6;
-        }
+    .modal-title {
+        font-weight: bold;
+    }
 
-        .modal-title {
-            font-weight: bold;
-        }
+    .modal-body {
+        padding: 20px;
+    }
 
-        .modal-body {
-            padding: 20px;
-        }
+    .modal-footer {
+        border-top: 1px solid #dee2e6;
+        padding: 15px;
+    }
 
-        .modal-footer {
-            border-top: 1px solid #dee2e6;
-            padding: 15px;
-        }
+    .close {
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1;
+        color: #00000;
+        opacity: 0.75;
+    }
 
-        .close {
-            font-size: 1.5rem;
-            font-weight: bold;
-            line-height: 1;
-            color: #00000;
-            opacity: 0.75;
-        }
-
-        /* Styling for the buttons in the footer */
-        .modal-footer .btn {
-            margin-right: 10px;
-        }
-    </style>
-    @include('sweetalert::alert')
-    @endsection
+    /* Styling for the buttons in the footer */
+    .modal-footer .btn {
+        margin-right: 10px;
+    }
+</style>
+@include('sweetalert::alert')
+@endsection

@@ -46,7 +46,7 @@
 
                     <div class="form-group">
                         <label for="lok_ws" class="form-label">Departemen<span class="text-danger">*</span></label>
-                        <select class="form-select" name="lok_ws" data-placeholder="Silahkan Pilih" id="single-select-field1" required>
+                        <select class="form-select" name="lok_ws" data-placeholder="Silahkan Pilih" id="single-select-field1">
                             <option value="" selected disabled>-- Pilih Lokasi Terdaftar --</option>
                             @foreach ($departemen as $departemen)
                             <option value="{{ $departemen->nama_departemen }}">{{ $departemen->nama_departemen }}</option>
@@ -59,7 +59,7 @@
 
                     <div class="form-group">
                         <label for="lok_ws" class="form-label">Plant<span class="text-danger">*</span></label>
-                        <select class="form-select" name="lok_ws" data-placeholder="Silahkan Pilih" id="single-select-field2" required>
+                        <select class="form-select" name="lok_ws" data-placeholder="Silahkan Pilih" id="single-select-field2">
                             <option value="" selected disabled>-- Pilih Lokasi Terdaftar --</option>
                             @foreach ($plant as $dataplant)
                             <option value="{{ $dataplant->nama_plant }}">{{ $dataplant->nama_plant }}</option>

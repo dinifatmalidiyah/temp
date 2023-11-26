@@ -39,7 +39,7 @@
         <div class="row justify-content-center align-items-center" style="height: 80vh;">
             <div class="col-md-6 text-center">
                 <p class="text-danger h2">Tidak ada akses</p>
-                <a href="/data-mesin"><button class="my-button">Kembali ke Data Mesin</button></a>
+                <a href="/"><button class="my-button">Home</button></a>
 </body>
 
 </html>

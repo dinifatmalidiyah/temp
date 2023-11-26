@@ -20,6 +20,7 @@
         <div class="card-body">
             <a href="/departemen/create" class="btn mb-3 btn-primary btn-icon-split btn-sm">Tambah Data Departemen</a>
             <button type="button" class="btn btn-success btn-icon-split btn-sm mb-3" data-toggle="modal" data-target="#importModal">IMPORT</button>
+            <a href="/departemen-export-excel" class="btn btn-success btn-icon-split btn-sm mb-3">EXPORT</a>
             <!--
       <a href="/kategori-mesin/printpdf" class="btn mb-3 btn-success btn-icon-split btn-sm">Print Kategori Mesin</a>
       -->
@@ -84,9 +85,6 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-center">
-                {{$post->links()}}
-            </div>
         </div>
         <!-- /.container-fluid -->
     </div>
@@ -100,7 +98,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="/import-departemen" method="POST" enctype="multipart/form-data">
+                <form action="/departemen-import-excel" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">

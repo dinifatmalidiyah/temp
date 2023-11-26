@@ -20,10 +20,6 @@ class isAdmin
             return $next($request);
         }
 
-        // Tampilkan pesan kesalahan jika bukan admin.
-        session()->flash('error', 'Tidak ada akses');
-
-        // Lanjutkan ke pemrosesan berikutnya tanpa melakukan redirect.
-        return $next($request);
+        return redirect('/tidak-memiki-izin')->with('error', 'Tidak ada akses'); // Redirect dan tampilkan pesan akses ditolak jika bukan admin.
     }
 }
