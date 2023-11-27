@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\DataTables;
 
 class UserController extends Controller
 {
@@ -24,10 +25,10 @@ class UserController extends Controller
     {
         $petugas = $petugas = DB::table('users')->get();
 
-        $post = User::latest();
+        $post = User::orderBy('nama', 'asc')->paginate(10);
         return view('petugas.index', [
             'users' => $petugas,
-            'post' => User::latest()->paginate(4)
+            'post' => User::orderBy('nama', 'asc')->paginate(20)
         ]);
     }
 
@@ -39,7 +40,9 @@ class UserController extends Controller
     public function create()
     {
         return view('petugas.create', [
-            'users' => User::all()
+            'users' => User::all(),
+            'plant' => Plant::all(),
+            'departemen' => Departemen::all()
         ]);
     }
 
@@ -57,9 +60,12 @@ class UserController extends Controller
             */
             'nama' => 'required',
             'email' => 'required',
-            'password' => 'required',
+            'nik' => 'required',
+            'departemen' => '',
+            'plant' => '',
+            'password' => '',
             'level' => 'required',
-            'tanggal_join' => 'required',
+            'tanggal_join' => '',
 
         ]);
 
@@ -100,7 +106,7 @@ class UserController extends Controller
         return view('petugas.edit', [
             'users' => $cek,
             'plant' => Plant::all(),
-            'departemen' => Departemen::all()
+            'departemen' => Departemen::all(),
         ]);
     }
 
@@ -121,9 +127,9 @@ class UserController extends Controller
             'email' => 'required',
             'password' => 'nullable|min:6', // Kata sandi menjadi opsional dan minimal 6 karakter
             'level' => 'required',
-            'nama_plant' => '',
-            'nama_departemen' => '',
-            'tanggal_join' => 'required',
+            'plant' => '',
+            'departemen' => '',
+            'tanggal_join' => '',
         ];
 
         $validatedData = $request->validate($rules);
@@ -163,5 +169,15 @@ class UserController extends Controller
         $articles = User::all();
         $pdf = PDF::loadview('petugas.pdf', ['users' => $articles]);
         return $pdf->stream();
+    }
+    public function getData()
+    {
+        $users = User::select(['id', 'name', 'email', 'created_at']);
+
+        return DataTables::of($users)
+            ->addColumn('action', function ($user) {
+                return '<button class="btn btn-sm btn-info">View</button>';
+            })
+            ->make(true);
     }
 }

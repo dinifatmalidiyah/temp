@@ -56,7 +56,6 @@ use App\Exports\PlantExport;
 use App\Imports\PlantImport;
 use App\Models\Departemen;
 use App\Models\Plant;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -92,7 +91,6 @@ Route::get('file-import-export', [MesinImportEksportController::class, 'ImportEx
 Route::post('file-import', [MesinImportEksportController::class, 'DataMesinImport'])->name('file-import');
 Route::get('file-export', [MesinImportEksportController::class, 'DataMesinExport'])->name('file-export');
 
-Route::post('/import-departemen', 'DepartemenController@import')->name('import.departemen');
 
 /*DATA MESIN */
 
@@ -121,6 +119,8 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::resource('/kategori-mesin', KategoriMesinController::class)
         ->only(['edit', 'destroy']);
 });
+
+
 
 /*DEPARTEMEN*/
 Route::resource('/departemen', DepartemenController::class)->middleware('isAdmin');
@@ -176,6 +176,13 @@ Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 
 Route::get('/pegawai/pdf', [DataAnggotaController::class, 'cetak_pdf'])->middleware(['auth', 'isAdmin']);
 Route::resource('/pegawai', DataAnggotaController::class)->middleware('auth', 'isAdmin');
+
+Route::get('users/data', 'UserController@getData')->name('users.data');
+
+
+Route::get('/mesin/getdata', [DataMesinController::class, 'getData'])->name('mesin.getdata');
+
+
 Route::resource('/datapetugas', UserController::class)->middleware(['auth', 'isAdmin']);
 Route::get('/petugas/pdf', [UserController::class, 'cetak_pdf']);
 Route::resource('/datamesin', DataBukuController::class);

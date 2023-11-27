@@ -26,11 +26,38 @@
                     -->
                     <div class="form-group">
                         <label for="Nama">NIK</label>
-                        <input type="text" name="nik" class="form-control" id="nik" ariadescribedby="Nama">
+                        <input type="text" name="nik" class="form-control" id="nik" ariadescribedby="NIK">
                     </div><br>
                     <div class="form-group">
                         <label for="Nama">Nama Petugas</label>
                         <input type="text" name="nama" class="form-control" id="Nama" ariadescribedby="Nama">
+                    </div><br>
+                    <div class="form-group row">
+                        <div class="col">
+                            <label for="lok_ws" class="form-label">Departemen</label>
+                            <select class="form-select" name="departemen" data-placeholder="Silahkan Pilih" id="single-select-field1">
+                                <option value="" selected disabled>-- Pilih Lokasi Terdaftar --</option>
+                                @foreach ($departemen as $departemen)
+                                <option value="{{ $departemen->nama_departemen }}">{{ $departemen->nama_departemen }}</option>
+                                @endforeach
+                            </select>
+                            @error('lok_ws')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div><br>
+
+                        <div class="col">
+                            <label for="lok_ws" class="form-label">Plant</label>
+                            <select class="form-select" name="plant" data-placeholder="Silahkan Pilih" id="single-select-field2">
+                                <option value="" selected disabled>-- Pilih Lokasi Terdaftar --</option>
+                                @foreach ($plant as $dataplant)
+                                <option value="{{ $dataplant->nama_plant }}">{{ $dataplant->nama_plant }}</option>
+                                @endforeach
+                            </select>
+                            @error('lok_ws')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div><br>
                     <div class="form-group">
                         <label for="email">Email</label>
@@ -47,10 +74,6 @@
                             <option value="admin">Admin</option>
                         </select>
                     </div><br>
-                    <div class="form-group">
-                        <label for="tanggal_join">Tanggal Join</label>
-                        <input type="date" name="tanggal_join" class="form-control" id="tanggal_join" ariadescribedby="tanggal_join">
-                    </div><br>
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <a class="btn btn-success " href="/datapetugas">Kembali</a>
                 </form>
@@ -58,4 +81,10 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('#single-select-field1').select2();
+        $('#single-select-field2').select2();
+    });
+</script>
 @endsection

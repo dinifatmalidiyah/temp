@@ -23,6 +23,7 @@
             -->
             <button type="button" class="btn btn-success btn-icon-split btn-sm mb-3" data-toggle="modal" data-target="#importModal">IMPORT</button>
             <a href="{{ route('file-export') }}" class="btn btn-success btn-icon-split btn-sm mb-3">EXPORT</a>
+            <button type="button" class="btn btn-success btn btn-danger btn-sm mb-3" data-toggle="modal" data-target="#resetModal">RESET</button>
 
         </div>
     </div>
@@ -129,7 +130,51 @@
             </div>
         </div>
     </div>
-
+    <!-- Modal Hapus -->
+    <div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="hapusModalLabel">Konfirmasi Hapus</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda yakin ingin menghapus data ini?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <!-- Form Hapus -->
+                    <form action="/data-mesin/{{ $mesin->id }}" method="POST" style="margin-right: 10px;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Reset -->
+    <div class="modal fade" id="resetModal" tabindex="-1" role="dialog" aria-labelledby="resetModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="hapusModalLabel">Konfirmasi Hapus</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda yakin ingin reset data ini?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Import Modal -->
     <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -156,11 +201,76 @@
             </div>
         </div>
     </div>
-
+    </body>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    </body>
+    <script>
+        $(function() {
+                    $('#datatable').DataTable().destroy();
+                    // Inisialisasi DataTable yang baru
+                    $('#datatable').DataTable({
+                        $('#datatable').DataTable({
+                            processing: true,
+                            serverSide: true,
+                            ajax: '{!! route('mesin.getdata') !!}',
+                            type: 'get',
+                            columns: [{
+                                    data: 'action',
+                                    name: 'action'
+                                },
+                                {
+                                    data: 'DT_RowIndex',
+                                    name: 'DT_RowIndex'
+                                },
+                                {
+                                    data: 'kode_jenis',
+                                    name: 'kode_jenis'
+                                },
+                                {
+                                    data: 'kategori.nama_kategori',
+                                    name: 'kategori.nama_kategori'
+                                },
+                                {
+                                    data: 'klasifikasi.nama_klasifikasi',
+                                    name: 'klasifikasi.nama_klasifikasi'
+                                },
+                                {
+                                    data: 'nama_mesin',
+                                    name: 'nama_mesin'
+                                },
+                                {
+                                    data: 'type_mesin',
+                                    name: 'type_mesin'
+                                },
+                                {
+                                    data: 'merk_mesin',
+                                    name: 'merk_mesin'
+                                },
+                                {
+                                    data: 'spek_min',
+                                    name: 'spek_min'
+                                },
+                                {
+                                    data: 'pabrik',
+                                    name: 'pabrik'
+                                },
+                                {
+                                    data: 'kapasitas',
+                                    name: 'kapasitas'
+                                },
+                                {
+                                    data: 'tahun_mesin',
+                                    name: 'tahun_mesin'
+                                },
+                                {
+                                    data: 'lok_ws',
+                                    name: 'lok_ws'
+                                },
+                            ],
+                        });
+                    });
+    </script>
     <style>
         /* Custom styles for all modals */
         .modal {

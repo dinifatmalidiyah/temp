@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Plant;
+use App\Models\Departemen;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -53,8 +55,12 @@ class RegisterController extends Controller
             'nama' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:3', 'confirmed'],
-            'level' => ['required','string','max:255'],
-            'tanggal_join'=> ['required'],
+            'level' => ['required', 'string', 'max:255'],
+            'tanggal_join' => ['required'],
+            'plant' => ['required'],
+            'departemen' => ['required'],
+            'nik' => ['required'],
+            'foto' => ['nullable', 'image', 'max:2048'], // Max file size in kilobytes
         ]);
     }
 
@@ -66,13 +72,36 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $userAttributes = [
             'nama' => $data['nama'],
             'email' => $data['email'],
+            'plant' => $data['plant'],
+            'departemen' => $data['departemen'],
+            'nik' => $data['nik'],
             'password' => Hash::make($data['password']),
-            'level'=>$data['level'],
-            'tanggal_join'=>$data['tanggal_join'],
+            'level' => $data['level'],
+            'tanggal_join' => $data['tanggal_join'],
+        ];
 
+        // Check if 'foto' is provided
+        if (isset($data['foto'])) {
+            // Store the uploaded file in the 'public' disk and get the path
+            $fotoPath = $data['foto']->store('users', 'public');
+
+            // Save the file path in the 'foto' field
+            $userAttributes['foto'] = $fotoPath;
+        }
+
+        // ... existing code
+
+        return User::create($userAttributes);
+    }
+
+    protected function showRegistrationForm()
+    {
+        return view('auth.register', [
+            'plant' => Plant::all(),
+            'departemen' => Departemen::all(),
         ]);
     }
 }

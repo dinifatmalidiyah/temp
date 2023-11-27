@@ -105,6 +105,12 @@
             $('#datatable1').DataTable({
                 "searching": true // Mengaktifkan pencarian
             });
+            $('#datatable5').DataTable({
+                "order": [
+                    [1, 'asc']
+                ], // Mengurutkan kolom No.Registrasi secara default
+                "searching": true // Mengaktifkan pencarian
+            });
         });
     </script>
 </body>

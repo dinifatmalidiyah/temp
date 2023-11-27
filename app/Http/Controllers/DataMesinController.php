@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Klasifikasi;
 use App\Models\Kategori;
 
+
 class DataMesinController extends Controller
 {
     /**
@@ -297,5 +298,15 @@ class DataMesinController extends Controller
 
         // Kembalikan hasil dalam format JSON
         return response()->json(['count' => $count]);
+    }
+    public function getData()
+    {
+        $datamesin = DataMesin::select('*');
+
+        return DataTables::of($datamesin)
+            ->addColumn('action', function ($datamesin) {
+                return '<button class="btn btn-sm btn-info">View</button>';
+            })
+            ->make(true);
     }
 }

@@ -17,16 +17,16 @@
       <div class="row px-3 py-3">
         <div class="col-lg-12">
           <div class="table-responsive">
-            <table class="table table-bordered table-hover" id="datatable">
+            <table class="table table-bordered table-hover" id="datatable5">
               <thead>
                 <tr>
                   <th>No.</th>
-                  <th>Foto</th>
+                  <th>Disetujui</th>
                   <th>Nama Lengkap</th>
                   <th>NIK</th>
-                  <th>Email</th>
                   <th>Departemen</th>
                   <th>Plant</th>
+                  <th>Email</th>
                   <th>Tanggal Aktif</th>
                   <th>Action</th>
                 </tr>
@@ -36,13 +36,13 @@
                 @foreach ($post as $user)
                 <tr>
                   <td>{{$loop->iteration}}</td>
-                  <td><img src="{{ asset('storage/'.$user -> foto) }}" alt="" height="50px" width="50px" class="rounded" style="object-fit: cover"></td>
+                  <td>{{ $user->approved }}</td>
                   <td class="text-capitalize">{{$user->nama}}</td>
                   <td>{{ $user->nik }}</td>
                   <td>{{ $user->departemen }}</td>
                   <td>{{ $user->plant }}</td>
-                  <td>{{$user->email}}</td>
-                  <td>{{$user->tanggal_join}}</td>
+                  <td>{{ $user->email }}</td>
+                  <td>{{ $user->created_at }}</td>
                   <td style="text-align:left;">
                     <a class="btn btn-primary" href="/datapetugas/{{$user->nama}}/edit"><i class="bi bi-pencil-square"></i></a>
                     <form action="/datapetugas/{{$user->id}}" method="POST">@csrf
@@ -76,7 +76,113 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+  <script>
+    $(function() {
+      $('#users-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{!! route('
+        users.data ') !!}',
+        columns: [{
+            data: 'id',
+            name: 'id'
+          },
+          {
+            data: 'name',
+            name: 'name'
+          },
+          {
+            data: 'email',
+            name: 'email'
+          },
+          {
+            data: 'created_at',
+            name: 'created_at'
+          },
+          {
+            data: 'action',
+            name: 'action',
+            orderable: false,
+            searchable: false
+          },
+        ]
+      });
+    });
+  </script>
+
+  <script>
+    $(function() {
+      $('#users-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{!! route('
+        users.data ') !!}',
+        columns: [{
+            data: 'id',
+            name: 'id'
+          },
+          {
+            data: 'name',
+            name: 'name'
+          },
+          {
+            data: 'email',
+            name: 'email'
+          },
+          {
+            data: 'created_at',
+            name: 'created_at'
+          },
+          {
+            data: 'action',
+            name: 'action',
+            orderable: false,
+            searchable: false
+          },
+        ]
+      });
+    });
+  </script>
   <style>
+    /* Custom styles for all modals */
+    .modal {
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-header {
+      background-color: #007bff;
+      color: #ffffff;
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    .modal-title {
+      font-weight: bold;
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .modal-footer {
+      border-top: 1px solid #dee2e6;
+      padding: 15px;
+    }
+
+    .close {
+      font-size: 1.5rem;
+      font-weight: bold;
+      line-height: 1;
+      color: #00000;
+      opacity: 0.75;
+    }
+
     /* Style for the table */
     .table.table-bordered thead th {
       text-align: center;
@@ -98,7 +204,7 @@
 
     .table.table-bordered th:nth-child(2),
     .table.table-bordered td:nth-child(2) {
-      width: 10%;
+      width: 20%;
     }
 
     .table.table-bordered th:nth-child(3),
