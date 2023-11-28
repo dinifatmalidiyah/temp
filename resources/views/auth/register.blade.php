@@ -21,11 +21,11 @@
                                 <p class="text-muted mb-4">Don't have an account? Create your account here </p>
                             </div>
 
-                            <form action="{{ route('register') }}" method="POST">
+                            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="gambar_mesin" class="form-label">Gambar Mesin</label>
-                                    <input type="file" name="gambar_mesin" class="form-control" id="gambar_mesin" placeholder="Masukan Gambar mesin">
+                                    <label for="foto" class="form-label">Foto</label>
+                                    <input type="file" name="foto" class="form-control" id="foto">
                                 </div>
                                 <div class="mb-3">
                                     <label for="fullname" class="form-label">Nama</label>
@@ -89,7 +89,7 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Confirm Password</label>
+                                    <label for="password" class="form-label">Ulangi Password</label>
                                     <div class="input-group input-group-merge">
                                         <input type="password" id="password" class="form-control" placeholder="Enter your password" name="password_confirmation">
                                         <div class="input-group-text" data-password="false">
@@ -97,7 +97,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="hidden" value="penguna" name="level">
+                                <input type="hidden" value="petugas" name="level">
                                 <input type="hidden" value="@php echo date('Y-m-d'); @endphp" name="tanggal_join">
                                 <div class="mb-3 text-center">
                                     <button class="btn btn-primary" type="submit"> Sign Up </button>
@@ -161,5 +161,52 @@
         });
         $('#single-select-field2').select2();
     });
+
+    function displaySelectedImage(event, elementId) {
+        const selectedImage = document.getElementById(elementId);
+        const fileInput = event.target;
+
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                selectedImage.src = e.target.result;
+            };
+
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
 </script>
+<style>
+    #imagePreview {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
+    }
+
+    #imagePreview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    #imagePreview::before {
+        content: '';
+        display: block;
+        padding-top: 100%;
+        /* This creates a square placeholder for the circle */
+    }
+
+    #imagePreview img,
+    #imagePreview::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+    }
+</style>
 @endsection

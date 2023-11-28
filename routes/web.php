@@ -56,6 +56,8 @@ use App\Exports\PlantExport;
 use App\Imports\PlantImport;
 use App\Models\Departemen;
 use App\Models\Plant;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -152,7 +154,7 @@ Route::get('/generate-qr-code/{code}', [QRCodeController::class, 'generateQRCode
 /*PENGAJUAN*/
 Route::resource('/pengajuan1', PermintaanController::class)->middleware('auth');
 
-Route::resource('pengajuan', PengajuanController::class);
+
 Route::resource('/validasi', ValidasiController::class)->middleware(['auth', 'isAdmin']);
 
 /*LAPORAN*/
@@ -205,3 +207,11 @@ Route::resource('/data-masuk', DataBarangMasukController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+Route::group(['middleware' => ['auth', 'checkApproved']], function () {
+    // Rute yang memerlukan persetujuan
+    Route::resource('pengajuan', PengajuanController::class);
+    // Tambahkan rute lain yang memerlukan persetujuan di sini
+});

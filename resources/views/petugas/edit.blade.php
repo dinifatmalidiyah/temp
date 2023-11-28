@@ -28,9 +28,7 @@
                             <img class="profile-user-img img-fluid img-circle user_picture" src="{{ asset('storage/' . $users->foto) }}" alt="User profile picture">
                         </div>
 
-                        <h3 class="profile-username text-center user_name"></h3>
-                        <input type="file" name="user_image" id="user_image" style="opacity: 0;height:1px;display:none">
-                        <a href="javascript:void(0)" class="btn btn-primary btn-block" id="change_picture_btn"><b>Ganti Foto</b></a>
+                        <input type="file" name="foto" class="form-control-file" id="foto" aria-describedby="foto">
                     </div>
                     <!-- /.card-body -->
                 </div>

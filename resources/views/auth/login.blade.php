@@ -68,5 +68,5 @@
                         2023 © - Maintenace
                     </footer>
                 </div>
-
+                @include('sweetalert::alert')
                 @endsection

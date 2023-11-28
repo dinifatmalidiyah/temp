@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('level');
             $table->date('tanggal_join');
+            $table->string('approved');
             $table->rememberToken();
             $table->timestamps();
         });

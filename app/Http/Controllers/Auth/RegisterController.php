@@ -81,18 +81,17 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'level' => $data['level'],
             'tanggal_join' => $data['tanggal_join'],
+            'approved' => 0, // Default is not approved
         ];
 
         // Check if 'foto' is provided
-        if (isset($data['foto'])) {
+        if (isset($data['foto']) && $data['foto'] instanceof UploadedFile) {
             // Store the uploaded file in the 'public' disk and get the path
             $fotoPath = $data['foto']->store('users', 'public');
 
             // Save the file path in the 'foto' field
             $userAttributes['foto'] = $fotoPath;
         }
-
-        // ... existing code
 
         return User::create($userAttributes);
     }

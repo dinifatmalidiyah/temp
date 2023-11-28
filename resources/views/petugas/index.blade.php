@@ -49,6 +49,9 @@
                       @method('DELETE')
                       <button onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini? ')" class="btn btn-danger"><i class="bi bi-trash"></i></button>
                     </form>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#approvalModal">
+                      Lihat
+                    </button>
                   </td>
                 </tr>
                 @endforeach
