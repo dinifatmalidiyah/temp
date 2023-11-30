@@ -72,19 +72,21 @@
                                     <input type="text" class="form-control" id="inputNik" placeholder="Masukan NIK" name="nik" value="{{ $users->nik }}">
                                 </div>
                             </div>
+                            <!--
                             <div class="form-group row">
                                 <label for="inputEmail" class="col-sm-2 col-form-label">Alamat Email</label>
                                 <div class="col-sm-10">
                                     <input type="email" class="form-control" id="inputEmail" placeholder="Alamat Email" name="email" value="{{ $users->email }}">
                                 </div>
                             </div>
+                            -->
                             <div class="form-group row">
                                 <label for="departemen" class="col-sm-2 col-form-label">Departemen</label>
                                 <div class="col-sm-10">
                                     <select class="form-select" name="departemen" data-placeholder="Silahkan Pilih" id="single-select-field1">
                                         <option value="" selected disabled>-- Pilih Lokasi Terdaftar --</option>
-                                        @foreach ($departemen as $departemen)
-                                        <option value="{{ $departemen->nama_departemen }}" @if($users->departemen == $departemen->nama_departemen) selected @endif>{{ $departemen->nama_departemen }}</option>
+                                        @foreach ($departemen as $dep)
+                                        <option value="{{ $dep->nama_departemen }}" @if($users->departemen == $dep->nama_departemen) selected @endif>{{ $dep->nama_departemen }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -106,6 +108,17 @@
                                     <select class="form-select" name="level">
                                         <option value="Admin" {{ $users->level == 'Admin' ? 'selected' : '' }}>Admin</option>
                                         <option value="Petugas" {{ $users->level == 'Petugas' ? 'selected' : '' }}>Petugas</option>
+                                        <option value="Karyawan" {{ $users->level == 'Karyawan' ? 'selected' : '' }}>karyawan</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="approved" class="col-sm-2 col-form-label">Approved</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" name="approved">
+                                        <option value="" selected disabled>-- Silahkan Pilih --</option>
+                                        <option value="1" {{ $users->approved == '1' ? 'selected' : '' }}>approved</option>
+                                        <option value="0" {{ $users->unapproved == '0' ? 'selected' : '' }}>unapproved</option>
                                     </select>
                                 </div>
                             </div>

@@ -28,7 +28,7 @@
                                     <input type="file" name="foto" class="form-control" id="foto">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="fullname" class="form-label">Nama</label>
+                                    <label for="fullname" class="form-label">Nama<span class="text-danger">*</span></label>
                                     <input class="form-control" type="text" id="fullname" placeholder="Enter your name" required name="nama" value="{{ old('nama') }}" autofocus>
                                     @error('nama')
                                     <span class="invalid-feedback" role="alert">
@@ -37,11 +37,11 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="Nama">NIK</label>
-                                    <input type="text" name="nik" class="form-control" id="nik" ariadescribedby="NIK">
+                                    <label for="nik">NIK<span class="text-danger">*</span></label>
+                                    <input type="text" name="nik" class="form-control" id="nik" aria-describedby="nik" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 7)" maxlength="7" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="lok_ws" class="form-label">Departemen</label>
+                                    <label for="lok_ws" class="form-label">Departemen<span class="text-danger">*</span></label>
                                     <select class="form-select" name="departemen" data-placeholder="Silahkan Pilih" id="single-select-field1">
                                         <option value="" selected disabled>-- Pilih Lokasi Terdaftar --</option>
                                         @foreach ($departemen as $departemen)
@@ -53,7 +53,7 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="lok_ws" class="form-label">Plant</label>
+                                    <label for="lok_ws" class="form-label">Plant<span class="text-danger">*</span></label>
                                     <select class="form-select" name="plant" data-placeholder="Silahkan Pilih" id="single-select-field2">
                                         <option value="" selected disabled>-- Pilih Lokasi Terdaftar --</option>
                                         @foreach ($plant as $dataplant)
@@ -64,6 +64,7 @@
                                     <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                <!--
                                 <div class="mb-3">
                                     <label for="emailaddress" class="form-label">Email address</label>
                                     <input class="form-control" type="email" id="emailaddress" required placeholder="Enter your email" name="email">
@@ -73,9 +74,10 @@
                                     </span>
                                     @enderror
                                 </div>
+                                -->
 
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Password</label>
+                                    <label for="password" class="form-label">Password<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <input type="password" id="password" class="form-control" placeholder="Enter your password" name="password">
                                         <div class="input-group-text" data-password="false">
@@ -89,7 +91,7 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Ulangi Password</label>
+                                    <label for="password" class="form-label">Ulangi Password<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <input type="password" id="password" class="form-control" placeholder="Enter your password" name="password_confirmation">
                                         <div class="input-group-text" data-password="false">
@@ -97,7 +99,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="hidden" value="petugas" name="level">
+                                <input type="hidden" value="Karyawan" name="level">
                                 <input type="hidden" value="@php echo date('Y-m-d'); @endphp" name="tanggal_join">
                                 <div class="mb-3 text-center">
                                     <button class="btn btn-primary" type="submit"> Sign Up </button>

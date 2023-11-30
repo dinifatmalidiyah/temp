@@ -53,7 +53,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'nama' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:3', 'confirmed'],
             'level' => ['required', 'string', 'max:255'],
             'tanggal_join' => ['required'],
@@ -74,7 +74,6 @@ class RegisterController extends Controller
     {
         $userAttributes = [
             'nama' => $data['nama'],
-            'email' => $data['email'],
             'plant' => $data['plant'],
             'departemen' => $data['departemen'],
             'nik' => $data['nik'],

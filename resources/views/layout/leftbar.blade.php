@@ -75,6 +75,12 @@
                             <a href="/klasifikasi-mesin">Klasifikasi</a>
                         </li>
                         <li>
+                            <a href="/departemen">Departemen</a>
+                        </li>
+                        <li>
+                            <a href="/plant">Plant</a>
+                        </li>
+                        <li>
                             <a href="/lokasi-workshop-mesin">Lokasi / User</a>
                         </li>
                     </ul>
@@ -82,6 +88,7 @@
             </li>
             @endif
             @endauth
+
 
             <!--PELAPORAN-->
             <li class="side-nav-title side-nav-item">Manajemen Pelaporan</li>
@@ -96,7 +103,7 @@
                 <div class="collapse" id="sidebarPerbaikan">
                     <ul class="side-nav-second-level">
                         <li>
-                            <a href="/pengajuan">Pengajuan</a>
+                            <a href="#">Validasi</a>
                         </li>
                         <li>
                             <a href="#">Status</a>
@@ -110,6 +117,7 @@
                     </ul>
                 </div>
             </li>
+
 
 
             <!--PENGGUNA-->

@@ -28,9 +28,9 @@
                             <form action="{{ route('login') }}" method="POST">
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="emailaddress" class="form-label">Email</label>
-                                    <input class="form-control" type="email" id="emailaddress" required="" placeholder="Enter your email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                    @error('email')
+                                    <label for="emailaddress" class="form-label">NIK</label>
+                                    <input class="form-control" type="nik" id="emailaddress" required="" placeholder="Masukkan NIK" name="nik" value="{{ old('nik') }}" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 7)" maxlength="7" required>
+                                    @error('nik')
                                     <a class="alert alert-danger" role="alert">
                                         <strong>Email/Password Yang Anda Masukkan Salah!</strong>
                                     </a>

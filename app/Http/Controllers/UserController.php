@@ -59,11 +59,12 @@ class UserController extends Controller
             'foto' => 'required',
             */
             'nama' => 'required',
-            'email' => 'required',
+            'email' => '',
             'nik' => 'required',
             'departemen' => '',
             'plant' => '',
             'password' => '',
+            'approved' => '',
             'level' => 'required',
             'tanggal_join' => '',
 
@@ -124,11 +125,12 @@ class UserController extends Controller
         'foto' => 'required',
         */
             'nama' => 'required',
-            'email' => 'required',
+            'email' => '',
             'password' => 'nullable|min:6', // Kata sandi menjadi opsional dan minimal 6 karakter
             'level' => 'required',
             'plant' => '',
             'departemen' => '',
+            'approved' => '',
             'tanggal_join' => '',
         ];
 
@@ -179,5 +181,19 @@ class UserController extends Controller
                 return '<button class="btn btn-sm btn-info">View</button>';
             })
             ->make(true);
+    }
+    public function approve(User $user)
+    {
+        // Lakukan logika approval disini
+        $user->update(['approved' => 1]);
+
+        return redirect()->route('users.index')->with('success', 'Penguna berhasil di approved');
+    }
+    public function unapprove(User $user)
+    {
+        // Lakukan logika unapproval disini
+        $user->update(['approved' => 0]);
+
+        return redirect()->route('users.index')->with('success', 'Penguna berhasil di unapproved');
     }
 }

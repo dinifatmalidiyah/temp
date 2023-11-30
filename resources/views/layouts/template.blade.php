@@ -9,13 +9,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- App favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ Storage::url('logo_unri.svg') }}">
+    <link rel="shortcut icon" href="./assets/images/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+
+    <!-- third party css -->
+    <link href="/assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css">
+    <!-- third party css end -->
 
     <!-- App css -->
-    <link href="{{ url('backend/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ url('backend/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ url('backend/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ url('backend/css/theme.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="light-style">
+    <link href="/assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style">
 
 </head>
 
@@ -27,21 +31,37 @@
     <!-- ============================================================== -->
     <!-- Start right Content here -->
     <!-- ============================================================== -->
-    <div class="main-content">
+    <div class="wrapper">
+        <!-- ========== Left Sidebar Start ========== -->
+        @include('layout.leftbar')
+        <!-- Left Sidebar End -->
 
-        @yield('content')
-        <!-- End Page-content -->
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
 
-        <footer class="footer">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-6">
-                        {{ date('Y') }}
-                    </div>
-                </div>
+        <div class="content-page">
+            <div class="content">
+                <!-- Topbar Start -->
+                @include('layout.navbar')
+                <!-- end Topbar -->
+
+                <!-- Start Content-->
+                @yield('content')
+                <!-- container -->
+
             </div>
-        </footer>
+            <!-- content -->
 
+            <!-- Footer Start -->
+            @include('layout.footer')
+            <!-- end Footer -->
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
     </div>
     <!-- end main content-->
 
@@ -64,6 +84,33 @@
 
     <!-- App js -->
     <script src="{{ url('backend/js/theme.js') }}"></script>
+    <script src="/assets/js/vendor.min.js"></script>
+    <script src="/assets/js/app.min.js"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <!-- Load SweetAlert dari CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+    <!-- DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+    <!-- Select2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
+
+    <!-- Select2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+
+    <!-- third party js -->
+    <script src="/assets/js/vendor/apexcharts.min.js"></script>
+    <script src="/assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="/assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
 
     <script>
         $(function() {

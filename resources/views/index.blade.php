@@ -63,6 +63,7 @@
     </div>
     @else
     @endif
+    @if(auth()->user()->level=='Admin')
     <!-- Jumlah kategori -->
     <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-left-success shadow h-100 py-2">
@@ -85,7 +86,9 @@
         </div>
       </div>
     </div>
-
+    @else
+    @endif
+    @if(auth()->user()->level=='Admin')
     <!-- Jumlah Klasifikasi -->
     <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-left-success shadow h-100 py-2">
@@ -108,8 +111,9 @@
         </div>
       </div>
     </div>
-
-
+    @else
+    @endif
+    @if(auth()->user()->level=='Admin')
     <!-- Jumlah Buku -->
     <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-left-success shadow h-100 py-2">
@@ -126,7 +130,8 @@
         </div>
       </div>
     </div>
-
+    @else
+    @endif
     <!-- Total Peminjaman 
     @if(auth()->user()->level=='Admin')
     <div class="col-xl-3 col-md-6 mb-4">
@@ -202,15 +207,26 @@
   </div>
 -->
     <!-- Approach -->
+    @if(auth()->user()->approved=='1')
     <div class="card shadow mb-4">
       <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Pesan !!!</h6>
       </div>
       <div class="card-body">
-        <p>Selamat Datang {{ Auth::user()->level }} <b class="text-uppercase ">{{ Auth::user()->nama }}, </b></p>
-        <p class="mb-0">Sistem Perbaikkan dan Pelaporan "MAINTENACE" <br> Jangan Berikan Email dan Password Anda pada Siapapun</p>
+        <p>Selamat datang <b class="text-uppercase ">{{ Auth::user()->nama }}</b></p>
+      </div>
+    </div>
+    @else
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Pesan !!!</h6>
+      </div>
+      <div class="card-body">
+        <p>Selamat datang <b class="text-uppercase ">{{ Auth::user()->nama }}, </b> Akun anda belum bisa digunakan.</p>
+        <p class="mb-0">Silahkan hubungi administrator untuk approval akun."</p>
       </div>
     </div>
   </div>
 </div>
+@endif
 @endsection

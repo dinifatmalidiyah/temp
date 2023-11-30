@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataMesin;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -44,5 +45,11 @@ class QRCodeController extends Controller
 
         // Menampilkan QR Code dalam bentuk gambar
         return response($qrCode)->header('Content-type', 'image/png');
+    }
+    public function lapor($id)
+    {
+        $datamesin = DataMesin::where('id', $id)->first();
+        $namaPemohon = auth()->user()->nama;
+        return view('pelaporan.permintaan.create', compact('namaPemohon'));
     }
 }

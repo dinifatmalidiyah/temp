@@ -53,6 +53,8 @@ use App\Http\Controllers\ValidasiController;
 use App\Imports\DepartemenImport;
 use App\Exports\DepartemenExport;
 use App\Exports\PlantExport;
+use App\Http\Controllers\Analisis\AnalisisController;
+use App\Http\Controllers\Feedback\FeedbackController;
 use App\Imports\PlantImport;
 use App\Models\Departemen;
 use App\Models\Plant;
@@ -146,6 +148,7 @@ Route::get('/tidak-memiki-izin', [NoAksesController::class, 'index']);
 /*DATA PUBLIC*/
 Route::get('/qrcode/{kode_jenis}', [QRCodeController::class, 'showQRCode'])->name('qrcode.show');
 Route::get('/qrcode/hasil/{kode_jenis}', [QRCodeController::class, 'showResult'])->name('qrcode.result');
+Route::get('/qrcode/hasil/{kode_jenis}/{id}', [QRCodeController::class, 'lapor'])->name('lapor.mesin')->middleware('auth');
 Route::resource('/spesifikasi-mesin', PerbaikanController::class);
 
 /*qrcode*/
@@ -153,7 +156,8 @@ Route::get('/generate-qr-code/{code}', [QRCodeController::class, 'generateQRCode
 
 /*PENGAJUAN*/
 Route::resource('/pengajuan1', PermintaanController::class)->middleware('auth');
-
+Route::resource('analisis', AnalisisController::class);
+Route::resource('feedback', FeedbackController::class);
 
 Route::resource('/validasi', ValidasiController::class)->middleware(['auth', 'isAdmin']);
 
@@ -208,7 +212,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::put('/users/approve/{user}', [UserController::class, 'approve'])->name('users.approve');
+Route::put('/users/unapprove/{user}', [UserController::class, 'unapprove'])->name('users.unapprove');
 
 Route::group(['middleware' => ['auth', 'checkApproved']], function () {
     // Rute yang memerlukan persetujuan

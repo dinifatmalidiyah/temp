@@ -32,22 +32,13 @@ class LoginController extends Controller
         return redirect()->intended($this->redirectPath());
     }
 
-    public function authenticate(Request $request)
+    protected function credentials(Request $request)
     {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required'
-        ], [
-            'email.required' => 'Email Harus Di Isi!',
-            'password.required' => 'Password Harus Di Isi!'
-        ]);
+        return $request->only($this->username(), 'password');
+    }
 
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            return redirect()->route('home');
-        }
-
-        return back()->withErrors(['email' => 'Email atau password salah.']);
+    public function username()
+    {
+        return 'nik';
     }
 }

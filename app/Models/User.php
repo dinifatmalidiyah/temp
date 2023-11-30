@@ -26,9 +26,12 @@ class User extends Authenticatable
         'email',
         'password',
         'level',
-        'tanggal_join',
-        'approved',
+        'approved'
     ];
+    public function findForPassport($username)
+    {
+        return $this->orWhere('email', $username)->orWhere('nik', $username)->first();
+    }
 
     /**
      * The attributes that should be hidden for serialization.
