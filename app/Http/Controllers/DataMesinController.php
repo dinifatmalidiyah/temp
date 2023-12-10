@@ -17,6 +17,7 @@ use App\Models\Klasifikasi;
 use App\Models\Kategori;
 use Yajra\DataTables\DataTables;
 
+
 class DataMesinController extends Controller
 {
     /**
@@ -96,6 +97,7 @@ class DataMesinController extends Controller
         if ($request->file('gambar_mesin')) {
             $tes['gambar_mesin'] = $request->file('gambar_mesin')->store('datamesin', 'public');
         }
+
 
         // Buat entitas Jenis dan isi input lainnya
         $jenis = new DataMesin([

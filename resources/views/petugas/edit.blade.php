@@ -107,6 +107,7 @@
                                 <div class="col-sm-10">
                                     <select class="form-select" name="level">
                                         <option value="Admin" {{ $users->level == 'Admin' ? 'selected' : '' }}>Admin</option>
+                                        <option value="Supervisor" {{ $users->level == 'Supervisor' ? 'selected' : '' }}>Supervisor</option>
                                         <option value="Petugas" {{ $users->level == 'Petugas' ? 'selected' : '' }}>Petugas</option>
                                         <option value="Karyawan" {{ $users->level == 'Karyawan' ? 'selected' : '' }}>karyawan</option>
                                     </select>

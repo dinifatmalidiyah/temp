@@ -127,7 +127,7 @@
                 </a>
                 <div class="{{ Request::is('pelaporan/*') ? 'collapse-show' : 'collapse' }}" id="sidebarPelaporan">
                     <ul class="side-nav-second-level">
-                        @if(auth()->user()->level=='Admin' || auth()->user()->level=='Petugas')
+                        @if(auth()->user()->level=='Admin' || auth()->user()->level=='Petugas' || auth()->user()->level=='Supervisor')
                         <li class="{{ Request::is('pelaporan/masuk*') ? 'active' : '' }}">
                             <a href="/pelaporan/masuk">Pelaporan Masuk</a>
                         </li>

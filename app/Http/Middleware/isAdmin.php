@@ -16,11 +16,12 @@ class isAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->check() && auth()->user()->level == 'Admin') {
+        if (auth()->check() && in_array(auth()->user()->level, ['Admin', 'Supervisor'])) {
             return $next($request);
         } else if (auth()->check() && auth()->user()->level == 'Petugas') {
             return $next($request);
         }
+
 
         return redirect('/tidak-memiki-izin')->with('error', 'Tidak ada akses'); // Redirect dan tampilkan pesan akses ditolak jika bukan admin.
     }

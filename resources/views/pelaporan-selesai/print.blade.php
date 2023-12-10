@@ -87,9 +87,22 @@
         {{-- @foreach($data as $pdf)
         <tr>
             <td>{{ $loop->iteration }}</td>
-            <td>{{ $pdf->nama }}</td>
+        <td>{{ $pdf->nama }}</td>
         </tr>
         @endforeach --}}
 </body>
 
 </html>
+
+<style>
+    #uraian_kerusakan {
+        width: 100%;
+        padding: 4px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-family: 'Arial', sans-serif;
+        /* Ganti dengan jenis font yang Anda inginkan */
+    }
+</style>

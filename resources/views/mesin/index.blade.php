@@ -139,16 +139,16 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
 
-<!-- DataTables Select CSS -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.4/css/select.dataTables.min.css">
+    <!-- DataTables Select CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.4/css/select.dataTables.min.css">
 
-<!-- DataTables Select JavaScript -->
-<script type="text/javascript" src="https://cdn.datatables.net/select/1.3.4/js/dataTables.select.min.js"></script>
+    <!-- DataTables Select JavaScript -->
+    <script type="text/javascript" src="https://cdn.datatables.net/select/1.3.4/js/dataTables.select.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#datatable7').DataTable({
-                "searching": true,		
-		    "select": true,
+                "searching": true,
+                "select": true,
                 "processing": true,
                 "serverSide": true,
                 "ajax": "{{ route('mesin.data') }}",
@@ -322,6 +322,14 @@
             });
         }
     </script>
+    <script>
+    $(document).ready(function() {
+        $('#data1').select2();
+        $('#data2').select2();
+        $('#data3').select2();
+
+    });
+</script>
     <style>
         .dataTables_filter input {
             width: 300px;
