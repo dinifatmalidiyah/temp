@@ -31,4 +31,8 @@ class KlasMesin extends Model
             ->groupBy('nama_kasifikasi')
             ->get();
     }
+    public function kategori()
+    {
+        return $this->belongsTo(KategoriMesin::class, 'nama_kategori', 'id');
+    }
 }

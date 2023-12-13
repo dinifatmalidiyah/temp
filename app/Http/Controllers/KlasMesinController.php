@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\KategoriMesin;
 use App\Models\KlasMesin;
+use App\Imports\KlasmesinImport;
+use App\Exports\KlasmesinExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KlasMesinController extends Controller
 {
@@ -119,5 +122,25 @@ class KlasMesinController extends Controller
     {
         KlasMesin::destroy($id);
         return redirect('/klasifikasi-mesin')->with('success', 'Data  Berhasil Dihapus!');
+    }
+
+    public function export()
+    {
+        return Excel::download(new KlasMesinExport, 'klasifikasi.xlsx');
+    }
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function import()
+    {
+        Excel::import(new KlasMesinImport, request()->file('file'));
+
+        return back()->with('success', 'Data imported successfully!');
+    }
+    public function reset()
+    {
+        // Hapus semua data departemen
+        KlasMesin::truncate();
+        return redirect()->route('plant.index')->with('success', 'Data plant berhasil di-reset.');
     }
 }

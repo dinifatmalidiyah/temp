@@ -107,12 +107,12 @@
             </div>
         </div>
     </div>
-
     <div class="row px-3 py-3">
         <div class="col-lg-12">
             <div class="table-responsive">
                 <table class="table table-bordered table-hover" id="datatable7">
                     <thead>
+                    </tr>
                         <tr>
                             <th>Ubah</th>
                             <th>No.</th>
@@ -129,36 +129,6 @@
                             <th>Lokasi</th>
                         </tr>
                     </thead>
-                    <div class="mb-3 row">
-                            <div class="col">
-                           <label for="nama_mesin" class="form-label">Nama Mesin</label>
-<select class="form-select" name="nama_mesin" id="data1" required>
-    <option value="" selected disabled>-- Pilih Nama Mesin --</option>
-    @foreach ($nama_mesin as $id => $nama_mesin)
-        <option value="{{ $id }}">{{ $nama_mesin }}</option>
-    @endforeach
-</select>
-</div>
-                            <div class="col">
-<label for="klas_mesin" class="form-label">Kategori Mesin</label>
-<select class="form-select" name="klas_mesin" id="data2" required>
-    <option value="" selected disabled>-- Pilih kategori Mesin --</option>
-    @foreach ($datamesin as $mesin)
-        <option value="{{ $mesin->kategori_mesin }}">{{ $mesin->nama_kategori}}</option>
-    @endforeach
-</select>
-</div>
-<div class="col">
-<label for="klas_mesin" class="form-label">Klasifikasi Mesin</label>
-<select class="form-select" name="klas_mesin" id="data3" required>
-    <option value="" selected disabled>-- Pilih Klasifikasi Mesin --</option>
-    @foreach ($datamesin as $mesin)
-        <option value="{{ $mesin->nama_klasifikasi }}">{{ $mesin->nama_klasifikasi }}</option>
-    @endforeach
-</select>
-
-</div>
-</div>
                 </table>
             </div>
         </div>
@@ -175,150 +145,154 @@
     <!-- DataTables Select JavaScript -->
     <script type="text/javascript" src="https://cdn.datatables.net/select/1.3.4/js/dataTables.select.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#datatable7').DataTable({
-                "searching": true,
-                "select": true,
-                "processing": true,
-                "serverSide": true,
-                "ajax": "{{ route('mesin.data') }}",
-                "columns": [{
-                        data: null,
-                        orderable: false,
-                        searchable: false,
-                        render: function(data, type, row) {
-                            return '<a class="btn btn-info" href="/data-mesin/' + row.id + '"><i class="bi bi-eye"></i></a>' +
-                                '<a class="btn btn-primary" href="/data-mesin/' + row.id + '/edit"><i class="bi bi-pencil-square"></i></a>' +
-                                '<form action="/data-mesin/' + row.id + '" method="POST" style="display:inline; margin-right: 10px;">' +
-                                '@csrf' +
-                                '@method("DELETE")' +
-                                '<button onclick="return confirm(\'Apakah Anda Yakin Ingin Menghapus Data Ini?\')" class="btn btn-danger"><i class="bi bi-trash"></i></button>' +
-                                '</form>' +
-                                '<a class="btn btn-info" href="/qrcode/' + row.kode_jenis + '" style="display: inline-block; padding: 5px; background-color: #ECEE81; margin-left: -6px;">' +
-                                '<img src="{{ asset("assets/icon/qrcode-solid.svg") }}" alt="Lihat" style="width: 34px; height: 27px;">' +
-                                '</a>';
+$(document).ready(function () {
+    var table = $('#datatable7').DataTable({
+        "searching": true,
+        "select": true,
+        "processing": true,
+        "serverSide": true,
+         "paging": true,
+        "ajax": "{{ route('mesin.data') }}",
+        "columns": [
+            // ... your existing columns ...
 
-                        }
-                    },
-                    {
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'kode_jenis',
-                        name: 'kode_jenis',
-                        searchable: true
-                    },
-                    {
-                        data: 'kategori.nama_kategori',
-                        name: 'kategori.nama_kategori',
-                        searchable: true
-                    },
-                    {
-                        data: 'klasifikasi.nama_klasifikasi',
-                        name: 'klasifikasi.nama_klasifikasi',
-                        searchable: true
-                    },
-                    {
-                        data: 'nama_mesin',
-                        name: 'nama_mesin',
-                        searchable: true
-                    },
-                    {
-                        data: 'type_mesin',
-                        name: 'type_mesin',
-                        searchable: true
-                    },
-                    {
-                        data: 'merk_mesin',
-                        name: 'merk_mesin',
-                        searchable: true
-                    },
-                    {
-                        data: 'spek_min',
-                        name: 'spek_min',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'pabrik',
-                        name: 'pabrik',
-                        searchable: true
-                    },
-                    {
-                        data: 'kapasitas',
-                        name: 'kapasitas',
-                        searchable: false
-                    },
-                    {
-                        data: 'tahun_mesin',
-                        name: 'tahun_mesin',
-                        searchable: true
-                    },
-                    {
-                        data: 'lok_ws',
-                        name: 'lok_ws',
-                        searchable: true
-                    },
-                ],
-                "language": {
-                    "search": "Search:",
-                    "search": "_INPUT_", // Menggunakan placeholder di dalam input pencarian
-                    "searchPlaceholder": "Cari Data...", // Teks placeholder
-                },
-                "dom": 'Bfrtip',
-                "buttons": [
-                    'copy', 'excel', 'pdf', 'print'
-                ],
-                "columnDefs": [{
-                        "width": "10%",
-                        "targets": 0
-                    },
-                    {
-                        "width": "5%",
-                        "targets": 1
-                    },
-                    {
-                        "width": "10%",
-                        "targets": 2
-                    },
-                    {
-                        "width": "15%",
-                        "targets": 3
-                    },
-                    {
-                        "width": "8%",
-                        "targets": 4
-                    },
-                    {
-                        "width": "10%",
-                        "targets": 5
-                    },
-                    {
-                        "width": "12%",
-                        "targets": 6
-                    },
-                    {
-                        "width": "10%",
-                        "targets": 7
-                    },
-                    {
-                        "width": "5%",
-                        "targets": 8
-                    },
-                    {
-                        "width": "5%",
-                        "targets": 9
-                    },
-                    {
-                        "width": "10%",
-                        "targets": 10
-                    },
-                ],
-            });
-        });
+            {
+                data: null,
+                orderable: false,
+                searchable: false,
+                render: function (data, type, row) {
+                    return '<a class="btn btn-info" href="/data-mesin/' + row.id + '"><i class="bi bi-eye"></i></a>' +
+                        '<a class="btn btn-primary" href="/data-mesin/' + row.id + '/edit"><i class="bi bi-pencil-square"></i></a>' +
+                        '<form action="/data-mesin/' + row.id + '" method="POST" style="display:inline; margin-right: 10px;">' +
+                        '@csrf' +
+                        '@method("DELETE")' +
+                        '<button onclick="return confirm(\'Apakah Anda Yakin Ingin Menghapus Data Ini?\')" class="btn btn-danger"><i class="bi bi-trash"></i></button>' +
+                        '</form>' +
+                        '<a class="btn btn-info" href="/qrcode/' + row.kode_jenis + '" style="display: inline-block; padding: 5px; background-color: #ECEE81; margin-left: -6px;">' +
+                        '<img src="{{ asset("assets/icon/qrcode-solid.svg") }}" alt="Lihat" style="width: 34px; height: 27px;">' +
+                        '</a>';
+                }
+            },
+            {
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex',
+                orderable: false,
+                searchable: false
+            },
+            {
+                data: 'kode_jenis',
+                name: 'kode_jenis',
+                searchable: true
+            },
+            {
+                data: 'kategori.nama_kategori',
+                name: 'kategori.nama_kategori',
+                searchable: true
+            },
+            {
+                data: 'klasifikasi.nama_klasifikasi',
+                name: 'klasifikasi.nama_klasifikasi',
+                searchable: true
+            },
+            {
+                data: 'nama_mesin',
+                name: 'nama_mesin',
+                searchable: true
+            },
+            {
+                data: 'type_mesin',
+                name: 'type_mesin',
+                searchable: true
+            },
+            {
+                data: 'merk_mesin',
+                name: 'merk_mesin',
+                searchable: true
+            },
+            {
+                data: 'spek_min',
+                name: 'spek_min',
+                orderable: false,
+                searchable: false
+            },
+            {
+                data: 'pabrik',
+                name: 'pabrik',
+                searchable: true
+            },
+            {
+                data: 'kapasitas',
+                name: 'kapasitas',
+                searchable: false
+            },
+            {
+                data: 'tahun_mesin',
+                name: 'tahun_mesin',
+                searchable: true
+            },
+            {
+                data: 'lok_ws',
+                name: 'lok_ws',
+                searchable: true
+            },
+        ],
+        "language": {
+            "search": "Search:",
+            "search": "_INPUT_", // Menggunakan placeholder di dalam input pencarian
+            "searchPlaceholder": "Cari Data...", // Teks placeholder
+        },
+        "dom": 'Bfrtip',
+        "buttons": [
+            'copy', 'excel', 'pdf', 'print'
+        ],
+        "columnDefs": [
+            {
+                "width": "10%",
+                "targets": 0
+            },
+            {
+                "width": "5%",
+                "targets": 1
+            },
+            {
+                "width": "10%",
+                "targets": 2
+            },
+            {
+                "width": "15%",
+                "targets": 3
+            },
+            {
+                "width": "8%",
+                "targets": 4
+            },
+            {
+                "width": "10%",
+                "targets": 5
+            },
+            {
+                "width": "12%",
+                "targets": 6
+            },
+            {
+                "width": "10%",
+                "targets": 7
+            },
+            {
+                "width": "5%",
+                "targets": 8
+            },
+            {
+                "width": "5%",
+                "targets": 9
+            },
+            {
+                "width": "10%",
+                "targets": 10
+            },
+        ],
+  });
+});
         // Fungsi konfirmasi hapus dengan modal
         function confirmDelete(id) {
             // Gantilah 'deleteModal' dengan ID modal konfirmasi Anda

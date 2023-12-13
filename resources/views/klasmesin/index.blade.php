@@ -21,6 +21,9 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <a href="klasifikasi-mesin/create" class="btn mb-3 btn-primary btn-icon-split btn-sm" data-toggle="modal" data-target="#tambahDataModal">Tambah Data</a>
+            <button type="button" class="btn btn-success btn-icon-split btn-sm mb-3" data-toggle="modal" data-target="#importModal">IMPORT</button>
+            <a href="/klasifikasi-export-excel" class="btn btn-success btn-icon-split btn-sm mb-3">EXPORT</a>
+            <button type="button" class="btn btn-success btn btn-danger btn-sm mb-3" data-toggle="modal" data-target="#resetModal">RESET</button>
             <div class="row px-3 py-3">
                 <div class="col-lg-12">
                     <div class="table-responsive">

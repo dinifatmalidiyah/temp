@@ -101,8 +101,7 @@ class DataMesinController extends Controller
 
         ]);
         if ($request->file('gambar_mesin')) {
-            $gambar = $request->file('gambar_mesin');
-            $tes['gambar_mesin'] = $this->compressAndStoreImage($gambar);
+            $tes['gambar_mesin'] = $request->file('gambar_mesin')->store('datamesin', 'public');
         }
 
         // Buat entitas DataMesin dan isi input lainnya
@@ -114,27 +113,6 @@ class DataMesinController extends Controller
 
         return redirect('/data-mesin')
             ->with('success', 'Data sudah tersimpan');
-    }
-
-    private function compressAndStoreImage($image)
-    {
-        $ukuran = $image->getSize();
-
-        // Check jika ukuran gambar lebih dari 1 MB
-        if ($ukuran > 1000000) {
-            // Kompresi gambar
-            $img = Image::make($image)->encode('jpg', 75); // Format dan kualitas gambar dapat disesuaikan
-
-            // Simpan gambar yang telah dikompres
-            $path = 'datamesin';
-            $filename = $image->getClientOriginalName();
-            $img->save($path . '/' . $filename);
-
-            return Storage::disk('public')->url($path . '/' . $filename);
-        } else {
-            // Simpan gambar asli
-            return $image->store('datamesin', 'public');
-        }
     }
 
     /**

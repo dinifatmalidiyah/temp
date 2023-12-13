@@ -136,6 +136,11 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::resource('/klasifikasi-mesin', KlasMesinController::class)
         ->only(['edit', 'destroy']);
 });
+/*EXPORT DAN IMPORT*/
+Route::get('/klasifikasi-export-excel', [KlasMesinController::class, 'export'])->name('export');
+Route::post('klasifikasi-import-excel', [KlasMesinController::class, 'import'])->name('import');
+/*RESET DATA*/
+Route::post('/klasifikasi/reset', [PlantController::class, 'reset'])->name('plant.reset');
 
 Route::resource('/registrasi-mesin', NoRegistrasiController::class);
 
