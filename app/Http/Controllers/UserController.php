@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\UserExport;
+use App\Imports\UserImport;
 use App\Models\Departemen;
 use App\Models\Plant;
 use Illuminate\Support\Facades\Hash;
@@ -13,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -195,5 +198,24 @@ class UserController extends Controller
         $user->update(['approved' => 0]);
 
         return redirect()->route('users.index')->with('success', 'Penguna berhasil di unapproved');
+    }
+    public function export()
+    {
+        return Excel::download(new UserExport, 'User.xlsx');
+    }
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function import()
+    {
+        Excel::import(new UserImport, request()->file('file'));
+
+        return back()->with('success', 'Data imported successfully!');
+    }
+    public function reset()
+    {
+        // Hapus semua data departemen
+        User::truncate();
+        return redirect()->route('plant.index')->with('success', 'Data plant berhasil di-reset.');
     }
 }

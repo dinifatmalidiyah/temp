@@ -3,12 +3,13 @@
 namespace App\Exports;
 
 use App\Models\KlasMesin;
-use App\Models\Plant;
+use App\Models\KategoriMesin;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithUpserts;
+use Maatwebsite\Excel\Concerns\WithMapping;
 
-class KlasMesinExport implements FromCollection, WithHeadings
+class KlasMesinExport implements FromCollection, WithHeadings, WithMapping
 {
     /**
      * @return \Illuminate\Support\Collection
@@ -19,9 +20,12 @@ class KlasMesinExport implements FromCollection, WithHeadings
 
         // Tambahkan nomor urut pada setiap baris data
         $numberedKlasMesins = $KlasMesins->map(function ($KlasMesin, $index) {
+            // Dapatkan nama kategori berdasarkan kategorimesin_id
+            $kategoriNama = KategoriMesin::find($KlasMesin->kategorimesin_id)->nama_kategori;
+
             return [
                 'No.' => $index + 1,
-                'Kategori' => $KlasMesin->kategorimesin_id,
+                'Kategori' => $kategoriNama,
                 'Nama Klasifikasi' => $KlasMesin->nama_klasifikasi,
                 'Kode Klasifikasi' => $KlasMesin->kode_klasifikasi,
                 // ... (tambahkan kolom lain jika diperlukan)
@@ -39,16 +43,27 @@ class KlasMesinExport implements FromCollection, WithHeadings
         // Tentukan nama kolom (header) yang diinginkan
         return [
             'No.',
+            'Kategori',
             'Nama Klasifikasi',
             'Kode Klasifikasi',
             // ... (tambahkan kolom lain jika diperlukan)
         ];
     }
-    public function model(array $row)
+
+    /**
+     * @param mixed $row
+     *
+     * @return array
+     */
+    public function map($row): array
     {
-        return KlasMesin::updateOrInsert(
-            ['nama_klasifikasi' => $row['nama_klasifikasi']],
-            ['kode_klasifikasi' => $row['kode_klasifikasi']],
-        );
+        // Kembalikan baris data yang di-mapping
+        return [
+            $row['No.'],
+            $row['Kategori'],
+            $row['Nama Klasifikasi'],
+            $row['Kode Klasifikasi'],
+            // ... (tambahkan kolom lain jika diperlukan)
+        ];
     }
 }

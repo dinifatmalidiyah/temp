@@ -150,6 +150,11 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::resource('/kategori-mesin', KategoriMesinController::class)
         ->only(['edit', 'destroy']);
 });
+/*EXPORT DAN IMPORT*/
+Route::get('/kategori-export-excel', [KategoriMesinController::class, 'export'])->name('export');
+Route::post('kategori-import-excel', [KategoriMesinController::class, 'import'])->name('import');
+/*RESET DATA*/
+Route::post('/klasifikasi/reset', [KategoriMesinController::class, 'reset'])->name('kategori.reset');
 
 
 
@@ -240,9 +245,15 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+/*USER*/
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::put('/users/approve/{user}', [UserController::class, 'approve'])->name('users.approve');
 Route::put('/users/unapprove/{user}', [UserController::class, 'unapprove'])->name('users.unapprove');
+/*EXPORT DAN IMPORT*/
+Route::get('/user-export-excel', [UserController::class, 'export'])->name('export');
+Route::post('user-import-excel', [UserController::class, 'import'])->name('import');
+/*RESET DATA*/
+Route::post('/user/reset', [UserController::class, 'reset'])->name('user.reset');
 
 Route::group(['middleware' => ['auth', 'checkApproved']], function () {
     // Rute yang memerlukan persetujuan

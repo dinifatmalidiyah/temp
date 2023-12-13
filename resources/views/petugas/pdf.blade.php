@@ -7,12 +7,11 @@
 </head>
 
 <body>
-	<style type="text/css">
-		table tr td,
-		table tr th {
-			font-size: 9pt;
-		}
-	</style>
+	<div class="header">
+		<div class="logo">
+			<img src="assets/images/laporan/header.png" alt="Logo Laporan">
+		</div>
+	</div>
 	<center>
 		<h5>DAFTAR PETUGAS</h4>
 			<h5>Laporan Data Petugas</h4>
