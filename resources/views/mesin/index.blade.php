@@ -107,47 +107,6 @@
             </div>
         </div>
     </div>
-<div class="filter-container">
-    <div id="noRegistrasiFilter" class="filter-dropdown"></div>
-    <div id="kategoriFilter" class="filter-dropdown"></div>
-    <div id="klasifikasiFilter" class="filter-dropdown"></div>
-    <div id="NamaMesinFilter" class="filter-dropdown"></div>
-    <div id="TypeFilter" class="filter-dropdown"></div>
-    <div id="MerkFilter" class="filter-dropdown"></div>
-    <div id="SpekFilter" class="filter-dropdown"></div>
-    <div id="PabrikFilter" class="filter-dropdown"></div>
-    <div id="KapasitasFilter" class="filter-dropdown"></div>
-    <div id="TahunFilter" class="filter-dropdown"></div>
-    <div id="LokasiFilter" class="filter-dropdown"></div>
-</div>
-<style>
-    .filter-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 20px; /* Adjust the gap between filter dropdowns */
-        margin-top: 20px; /* Optional: Adjust the top margin */
-    }
-
-    .filter-dropdown {
-        text-align: center;
-    }
-
-    .filter-dropdown label {
-        display: block;
-        margin-bottom: 5px; /* Adjust the margin between label and dropdown */
-    }
-
-    .filter-select {
-        width: 150px; /* Adjust the width of the dropdown */
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-</style>
-
-
 
     <div class="row px-3 py-3">
         <div class="col-lg-12">
@@ -332,54 +291,9 @@ $(document).ready(function () {
                 "targets": 10
             },
         ],
-  initComplete: function () {
-            // Create a select dropdown for the No.Registrasi column (index 2)
-            var columnNoRegistrasi = this.api().column(2);
-            createFilterDropdown(columnNoRegistrasi, '#noRegistrasiFilter');
-
-            // Create a select dropdown for the Kategori column (index 5)
-            var columnKategori = this.api().column(3);
-            createFilterDropdown(columnKategori, '#kategoriFilter');
-
-            // Create a select dropdown for the Klasifikasi column (index 6)
-            var columnKlasifikasi = this.api().column(4);
-            createFilterDropdown(columnKlasifikasi, '#klasifikasiFilter');
-
-            // Create a select dropdown for the Klasifikasi column (index 6)
-            var columnNamaMesin = this.api().column(5);
-            createFilterDropdown(columnNamaMesin, '#NamaMesinFilter');
-
-            var columnType = this.api().column(6);
-            createFilterDropdown(columnType, '#TypeFilter');
-
-            var columnMerk = this.api().column(7);
-            createFilterDropdown(columnMerk, '#MerkFilter');
-
-            var columnSpek = this.api().column(8);
-            createFilterDropdown(columnSpek, '#SpekFilter');
-        }
     });
-
-    function createFilterDropdown(column, containerId) {
-        var container = $(containerId);
-        var select = $('<select><option value="">--Silahkan Pilih--</option></select>')
-            .appendTo(container)
-            .on('change', function () {
-                var val = $.fn.dataTable.util.escapeRegex(
-                    $(this).val()
-                );
-
-                column
-                    .search(val ? '^' + val + '$' : '', true, false)
-                    .draw();
-            });
-
-        // Populate the dropdown with unique values from the column
-        column.data().unique().sort().each(function (d, j) {
-            select.append('<option value="' + d + '">' + d + '</option>')
-        });
-    }
 });
+ 
         // Fungsi konfirmasi hapus dengan modal
         function confirmDelete(id) {
             // Gantilah 'deleteModal' dengan ID modal konfirmasi Anda
