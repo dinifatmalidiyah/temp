@@ -22,7 +22,7 @@ class DataKategoriSeeder extends Seeder
             ],
             [
                 'nama_kategori' => 'mesin 2',
-                'deskripsi' => 'Suatu buku yang menceritakan tentang rangkaian kehidupan seorang tokoh dan orang-orang 
+                'deskripsi' => 'Suatu buku yang menceritakan tentang rangkaian kehidupan seorang tokoh dan orang-orang
                              disekitarnya dengan berbagai macam watak yang ditonjolkan',
             ],
         ]);

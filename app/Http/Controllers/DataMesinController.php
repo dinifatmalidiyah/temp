@@ -29,18 +29,9 @@ class DataMesinController extends Controller
 
     public function index()
     {
-        $dataMesin = DataMesin::select('datamesin.*', 'kategorimesin.nama_kategori', 'klasmesin.nama_klasifikasi')
-            ->join('klasmesin', 'datamesin.klas_mesin', '=', 'klasmesin.id')
-            ->join('kategorimesin', 'datamesin.nama_kategori', '=', 'kategorimesin.id')
-            ->orderBy('datamesin.nama_mesin', 'asc')
-            ->get();
-
-        $nama_mesin = DataMesin::pluck('nama_mesin', 'id');
-
-        return view('mesin.index', [
-            'datamesin' => $dataMesin,
-            'nama_mesin' => $nama_mesin,
-        ]);
+        $kategori = KategoriMesin::all();
+        $klasifikasi = KlasMesin::all();
+        return view('mesin.index', compact('kategori', 'klasifikasi'));
     }
 
 
@@ -316,39 +307,50 @@ class DataMesinController extends Controller
 
     public function getDataMesin()
     {
-        $dataMesin = DataMesin::with('kategori', 'klasifikasi')
-            ->orderBy('nama_kategori', 'asc');
+        $dataMesin = DataMesin::query()
+            ->with('kategori', 'klasifikasi')
+            ->select('datamesin.*');
 
-        $datatables = DataTables::of($dataMesin)
+        return DataTables::of($dataMesin)
             ->addColumn('DT_RowIndex', function ($data) {
                 return $data->id;
             })
+            ->addColumn('nama_kategori', function ($data) {
+                return $data->kategori->nama_kategori;
+            })
+            ->addColumn('nama_klasifikasi', function ($data) {
+                return $data->klasifikasi->nama_klasifikasi;
+            })
             ->addColumn('action', function ($data) {
-                // Add any additional columns or formatting as needed
                 return '<button>Edit</button>';
             })
             ->filter(function ($query) {
-                if (request()->has('search') && request('search')['value']) {
-                    $searchTerm = request('search')['value'];
-                    $query->where(function ($query) use ($searchTerm) {
-                        $query->whereHas('kategorimesin', function ($subquery) use ($searchTerm) {
-                            // Melakukan join dengan tabel kategorimesin dan mencari berdasarkan nama_kategori
-                            $subquery->where('nama_kategori', 'like', '%' . $searchTerm . '%');
-                        })
-                            ->orWhere('nama_mesin', 'like', '%' . $searchTerm . '%')
-                            ->orWhere('type_mesin', 'like', '%' . $searchTerm . '%')
-                            ->orWhereHas('klasmesin', function ($subquery) use ($searchTerm) {
-                                // Melakukan join dengan tabel klasmesin dan mencari berdasarkan nama_klasifikasi
-                                $subquery->where('nama_klasifikasi', 'like', '%' . $searchTerm . '%');
-                            })
-                            ->orWhere('merk_mesin', 'like', '%' . $searchTerm . '%')
-                            ->orWhere('pabrik', 'like', '%' . $searchTerm . '%')
-                            ->orWhere('tahun_mesin', 'like', '%' . $searchTerm . '%')
-                            ->orWhere('lok_ws', 'like', '%' . $searchTerm . '%');
+                if (request()->has('nama_kategori')) {
+                    $query->whereHas('kategori', function ($q) {
+                        $q->where('nama_kategori', request('nama_kategori'));
                     });
                 }
-            });
-
-        return $datatables->make(true);
+                if (request()->has('nama_klasifikasi')) {
+                    $query->whereHas('klasifikasi', function ($q) {
+                        $q->where('nama_klasifikasi', request('nama_klasifikasi'));
+                    });
+                }
+                // search
+                if (request()->has('search') && request('search')['value'] != '') {
+                    $searchValue = request('search')['value'];
+                    $query->where(function ($q) use ($searchValue) {
+                        $q->where('nama_mesin', 'like', '%' . $searchValue . '%')
+                            ->orWhere('kode_jenis', 'like', '%' . $searchValue . '%')
+                            ->orWhere('type_mesin', 'like', '%' . $searchValue . '%')
+                            ->orWhere('merk_mesin', 'like', '%' . $searchValue . '%')
+                            ->orWhere('spek_min', 'like', '%' . $searchValue . '%')
+                            ->orWhere('spek_max', 'like', '%' . $searchValue . '%')
+                            ->orWhere('tahun_mesin', 'like', '%' . $searchValue . '%')
+                            ->orWhere('lok_ws', 'like', '%' . $searchValue . '%');
+                    });
+                }
+            })
+            ->rawColumns(['action', 'nama_kategori', 'nama_klasifikasi'])
+            ->toJson();
     }
 }

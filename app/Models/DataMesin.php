@@ -13,14 +13,17 @@ class DataMesin extends Model
     protected $table = 'datamesin';
     protected $primaryKey = 'id';
     protected $guarded = [];
+
     public function kategori()
     {
-        return $this->belongsTo(KategoriMesin::class, 'nama_kategori', 'id');
+        return $this->belongsTo(KategoriMesin::class, 'kode_kategori', 'id');
     }
+
     public function klasifikasi()
     {
-        return $this->belongsTo(KlasMesin::class, 'klas_mesin', 'id');
+        return $this->belongsTo(KlasMesin::class, 'kode_klasifikasi', 'id');
     }
+
     public function workshop()
     {
         return $this->belongsTo(Workshop::class, 'lok_ws', 'nama_workshop');
@@ -31,19 +34,23 @@ class DataMesin extends Model
     {
         return $this->belongsTo(Klasmesin::class, 'klas_mesin');
     }
+
     public function kategorimesin()
     {
         return $this->belongsTo(Kategorimesin::class, 'nama_kategori');
     }
+
     /*SERVER SIDE RELATIONSHIP*/
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
     public function peminjamans()
     {
         return $this->hasMany(Peminjaman::class);
     }
+
     public static function boot()
     {
         parent::boot();
@@ -61,6 +68,7 @@ class DataMesin extends Model
             $jenis->kodeJenis = $newKode;
         });
     }
+
     protected $fillable = [
         'kategori_id',
         'klasifikasi_id',
@@ -84,6 +92,7 @@ class DataMesin extends Model
         'kategorimesin_id',
         'klasmesin_id',
     ];
+
     public function toSearchableArray()
     {
         return [
