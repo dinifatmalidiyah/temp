@@ -33,7 +33,6 @@
             </button>
 
 
-
         </div>
     </div>
     <!-- Import Modal -->
@@ -109,121 +108,121 @@
     </div>
 
 
-<style>
-/* Filter Dropdown Styles */
-.filter-dropdown {
-    width: auto; /* Set width to auto to match column width */
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-}
+    <style>
+        /* Filter Dropdown Styles */
+        .filter-dropdown {
+            width: auto;
+            /* Set width to auto to match column width */
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
 
-/* Adjust the position of the pseudo-element */
-.filter-column:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    height: 100%; /* Set height to 100% */
-    background-color: white;
-    z-index: -1;
-}
+        /* Adjust the position of the pseudo-element */
+        .filter-column:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 100%;
+            /* Set height to 100% */
+            background-color: white;
+            z-index: -1;
+        }
 
-/* Reset Button Styles */
-#resetFilterBtn {
-    padding: 8px;
-    background-color: #00FF00;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+        /* Reset Button Styles */
+        #resetFilterBtn {
+            padding: 8px;
+            background-color: #00FF00;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-#resetFilterBtn:hover {
-    background-color: #FF0000;
-}
+        #resetFilterBtn:hover {
+            background-color: #FF0000;
+        }
+    </style>
 
-</style>
+    <!-- Include Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 
-<!-- Include Select2 CSS -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- Include Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
-<!-- Include Select2 JS -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <div class="row px-3 py-3">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="datatable8">
+                    <thead>
+                        <tr>
+                            <th>
+                                <button id="resetFilterBtn" class="filter-dropdown">Reset</button>
+                            </th>
+                            <th>
 
+                            </th>
+                            <th>
+                                <div id="noRegistrasiFilter" class="filter-dropdown"></div>
+                            </th>
+                            <th>
 
-<div class="row px-3 py-3">
-    <div class="col-lg-12">
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover" id="datatable7">
-                <thead>
-                    <tr>
-                        <th>
-                            <button id="resetFilterBtn" class="filter-dropdown">Reset</button>
-                        </th>
-                        <th>
-                            
-                        </th>
-                        <th>
-                            <div id="noRegistrasiFilter" class="filter-dropdown"></div>
-                        </th>
-                        <th>
+                                <div id="KategoriFilter" class="filter-dropdown"></div>
 
-                            <div id="kategoriFilter" class="filter-dropdown"></div>
+                            </th>
+                            <th>
 
-                        </th>
-                        <th>
+                                <div id="KlasifikasiFilter" class="filter-dropdown"></div>
 
-                            <div id="klasifikasiFilter" class="filter-dropdown"></div>
-
-                        </th>
-                        <th>
-                            <div id="NamaMesinFilter" class="filter-dropdown"></div>
-                        </th>
-                        <th>
-                            <div id="TypeFilter" class="filter-dropdown"></div>
-                        </th>
-                        <th>
-                            <div id="MerkFilter" class="filter-dropdown"></div>
-                        </th>
-                        <th>
-                            <div id="SpekFilter" class="filter-dropdown"></div>
-                        </th>
-                        <th>
-                            <div id="PabrikFilter" class="filter-dropdown"></div>
-                        </th>
-                        <th>
-                            <div id="KapasitasFilter" class="filter-dropdown"></div>
-                        </th>
-                        <th>
-                            <div id="TahunFilter" class="filter-dropdown"></div>
-                        </th>
-                        <th>
-                            <div id="LokasiFilter" class="filter-dropdown"></div>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>Ubah</th>
-                        <th>No.</th>
-                        <th>No.Registrasi</th>
-                        <th>Katgeori Mesin</th>
-                        <th>Klasifikasi Mesin</th>
-                        <th>Nama Mesin</th>
-                        <th>Type</th>
-                        <th>Merk</th>
-                        <th>Spesifikasi</th>
-                        <th>Pabrikan</th>
-                        <th>Kapasitas</th>
-                        <th>Tahun Mesin</th>
-                        <th>Lokasi</th>
-                    </tr>
-                </thead>
-                <tbody></tbody> <!-- Your table body content -->
-            </table>
+                            </th>
+                            <th>
+                                <div id="NamaMesinFilter" class="filter-dropdown"></div>
+                            </th>
+                            <th>
+                                <div id="TypeFilter" class="filter-dropdown"></div>
+                            </th>
+                            <th>
+                                <div id="MerkFilter" class="filter-dropdown"></div>
+                            </th>
+                            <th>
+                                <div id="SpekFilter" class="filter-dropdown"></div>
+                            </th>
+                            <th>
+                                <div id="PabrikFilter" class="filter-dropdown"></div>
+                            </th>
+                            <th>
+                                <div id="KapasitasFilter" class="filter-dropdown"></div>
+                            </th>
+                            <th>
+                                <div id="TahunFilter" class="filter-dropdown"></div>
+                            </th>
+                            <th>
+                                <div id="LokasiFilter" class="filter-dropdown"></div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Ubah</th>
+                            <th>No.</th>
+                            <th>No.Registrasi</th>
+                            <th>Katgeori Mesin</th>
+                            <th>Klasifikasi Mesin</th>
+                            <th>Nama Mesin</th>
+                            <th>Type</th>
+                            <th>Merk</th>
+                            <th>Spesifikasi</th>
+                            <th>Pabrikan</th>
+                            <th>Kapasitas</th>
+                            <th>Tahun Mesin</th>
+                            <th>Lokasi</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody> <!-- Your table body content -->
+                </table>
+            </div>
         </div>
     </div>
-</div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
@@ -237,189 +236,193 @@
     <!-- DataTables Select JavaScript -->
     <script type="text/javascript" src="https://cdn.datatables.net/select/1.3.4/js/dataTables.select.min.js"></script>
     <script>
-$(document).ready(function () {
-    var table = $('#datatable7').DataTable({
-        "searching": true,
-        "select": true,
-        "processing": true,
-        "serverSide": true,
-        "paging": true,
-        "ajax": {
-            "url": "{{ route('mesin.data') }}",
-            "type": "GET",
-            "data": function (d) {
-                d.kategori = $('#kategoriFilter').val();
-                d.klasifikasi = $('#klasifikasiFilter').val();
-            }
-        },
-        "columns": [
-            // ... your existing columns ...
+        $(document).ready(function() {
+            var table = $('#datatable8').DataTable({
+                "searching": true,
+                "select": true,
+                "processing": true,
+                "serverSide": true,
+                "paging": false,
+                "ajax": {
+                    "url": "{{ route('mesin.data') }}",
+                    "type": "GET",
+                    "data": function(d) {
+                        d.kategori = $('#kategoriFilter').val();
+                        d.klasifikasi = $('#klasifikasiFilter').val();
+                    },
+                    "dataSrc": function(json) {
+                        // You can handle additional processing here if needed
+                        return json.data;
+                    }
+                },
+                "columns": [
+                    // ... your existing columns ...
 
-            {
-                data: null,
-                orderable: false,
-                searchable: false,
-                render: function (data, type, row) {
-                    return '<a class="btn btn-info" href="/data-mesin/' + row.id + '"><i class="bi bi-eye"></i></a>' +
-                        '<a class="btn btn-primary" href="/data-mesin/' + row.id + '/edit"><i class="bi bi-pencil-square"></i></a>' +
-                        '<form action="/data-mesin/' + row.id + '" method="POST" style="display:inline; margin-right: 10px;">' +
-                        '@csrf' +
-                        '@method("DELETE")' +
-                        '<button onclick="return confirm(\'Apakah Anda Yakin Ingin Menghapus Data Ini?\')" class="btn btn-danger"><i class="bi bi-trash"></i></button>' +
-                        '</form>' +
-                        '<a class="btn btn-info" href="/qrcode/' + row.kode_jenis + '" style="display: inline-block; padding: 5px; background-color: #ECEE81; margin-left: -6px;">' +
-                        '<img src="{{ asset("assets/icon/qrcode-solid.svg") }}" alt="Lihat" style="width: 34px; height: 27px;">' +
-                        '</a>';
+                    {
+                        data: null,
+                        orderable: false,
+                        searchable: false,
+                        render: function(data, type, row) {
+                            return '<a class="btn btn-info" href="/data-mesin/' + row.id + '"><i class="bi bi-eye"></i></a>' +
+                                '<a class="btn btn-primary" href="/data-mesin/' + row.id + '/edit"><i class="bi bi-pencil-square"></i></a>' +
+                                '<form action="/data-mesin/' + row.id + '" method="POST" style="display:inline; margin-right: 10px;">' +
+                                '@csrf' +
+                                '@method("DELETE")' +
+                                '<button onclick="return confirm(\'Apakah Anda Yakin Ingin Menghapus Data Ini?\')" class="btn btn-danger"><i class="bi bi-trash"></i></button>' +
+                                '</form>' +
+                                '<a class="btn btn-info" href="/qrcode/' + row.kode_jenis + '" style="display: inline-block; padding: 5px; background-color: #ECEE81; margin-left: -6px;">' +
+                                '<img src="{{ asset("assets/icon/qrcode-solid.svg") }}" alt="Lihat" style="width: 34px; height: 27px;">' +
+                                '</a>';
+                        }
+                    },
+                    {
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'kode_jenis',
+                        name: 'kode_jenis',
+                        searchable: true
+                    },
+                    {
+                        data: 'kategori.nama_kategori',
+                        name: 'kategori.nama_kategori',
+                        searchable: true
+                    },
+                    {
+                        data: 'klasifikasi.nama_klasifikasi',
+                        name: 'klasifikasi.nama_klasifikasi',
+                        searchable: true
+                    },
+                    {
+                        data: 'nama_mesin',
+                        name: 'nama_mesin',
+                        searchable: true
+                    },
+                    {
+                        data: 'type_mesin',
+                        name: 'type_mesin',
+                        searchable: true
+                    },
+                    {
+                        data: 'merk_mesin',
+                        name: 'merk_mesin',
+                        searchable: true
+                    },
+                    {
+                        data: 'spek_min',
+                        name: 'spek_min',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'pabrik',
+                        name: 'pabrik',
+                        searchable: true
+                    },
+                    {
+                        data: 'kapasitas',
+                        name: 'kapasitas',
+                        searchable: false
+                    },
+                    {
+                        data: 'tahun_mesin',
+                        name: 'tahun_mesin',
+                        searchable: true
+                    },
+                    {
+                        data: 'lok_ws',
+                        name: 'lok_ws',
+                        searchable: true
+                    },
+                ],
+                "language": {
+                    "search": "Search:",
+                    "search": "_INPUT_",
+                    "searchPlaceholder": "Cari Data...",
+                },
+                "dom": 'Bfrtip',
+                "buttons": [
+                    'copy', 'excel', 'pdf', 'print'
+                ],
+                "columnDefs": [
+                    // ... column definitions ...
+                ],
+                "initComplete": function() {
+                    var columnNoUrut = this.api().column(1);
+                    createFilterDropdown(columnNoUrut, '#NoUrutFilter');
+                    var columnNoRegistrasi = this.api().column(2);
+                    createFilterDropdown(columnNoRegistrasi, '#noRegistrasiFilter');
+
+                    var columnKategori = this.api().column(3);
+                    createFilterDropdown(columnKategori, '#KategoriFilter');
+
+                    var columnKlasifikasi = this.api().column(4);
+                    createFilterDropdown(columnKlasifikasi, '#KlasifikasiFilter');
+
+                    var columnNamaMesin = this.api().column(5);
+                    createFilterDropdown(columnNamaMesin, '#NamaMesinFilter');
+
+                    var columnType = this.api().column(6);
+                    createFilterDropdown(columnType, '#TypeFilter');
+
+                    var columnMerk = this.api().column(7);
+                    createFilterDropdown(columnMerk, '#MerkFilter');
+
+                    var columnSpek = this.api().column(7);
+                    createFilterDropdown(columnSpek, '#SpekFilter');
+
+                    var columnPabrik = this.api().column(9);
+                    createFilterDropdown(columnPabrik, '#PabrikFilter');
+
+                    var columnKapasitas = this.api().column(10);
+                    createFilterDropdown(columnKapasitas, '#KapasitasFilter');
+
+                    var columnTahun = this.api().column(11);
+                    createFilterDropdown(columnTahun, '#TahunFilter');
+
+                    var columnLokasi = this.api().column(12);
+                    createFilterDropdown(columnLokasi, '#LokasiFilter');
                 }
-            },
-            {
-                data: 'DT_RowIndex',
-                name: 'DT_RowIndex',
-                orderable: false,
-                searchable: false
-            },
-            {
-                data: 'kode_jenis',
-                name: 'kode_jenis',
-                searchable: true
-            },
-            {
-                data: 'kategori.nama_kategori',
-                name: 'kategori.nama_kategori',
-                searchable: true
-            },
-            {
-                data: 'klasifikasi.nama_klasifikasi',
-                name: 'klasifikasi.nama_klasifikasi',
-                searchable: true
-            },
-            {
-                data: 'nama_mesin',
-                name: 'nama_mesin',
-                searchable: true
-            },
-            {
-                data: 'type_mesin',
-                name: 'type_mesin',
-                searchable: true
-            },
-            {
-                data: 'merk_mesin',
-                name: 'merk_mesin',
-                searchable: true
-            },
-            {
-                data: 'spek_min',
-                name: 'spek_min',
-                orderable: false,
-                searchable: false
-            },
-            {
-                data: 'pabrik',
-                name: 'pabrik',
-                searchable: true
-            },
-            {
-                data: 'kapasitas',
-                name: 'kapasitas',
-                searchable: false
-            },
-            {
-                data: 'tahun_mesin',
-                name: 'tahun_mesin',
-                searchable: true
-            },
-            {
-                data: 'lok_ws',
-                name: 'lok_ws',
-                searchable: true
-            },
-        ],
-        "language": {
-            "search": "Search:",
-            "search": "_INPUT_", 
-            "searchPlaceholder": "Cari Data...",
-        },
-        "dom": 'Bfrtip',
-        "buttons": [
-            'copy', 'excel', 'pdf', 'print'
-        ],
-        "columnDefs": [
-            // ... column definitions ...
-        ],
-        "initComplete": function () {
-            var columnNoUrut = this.api().column(1);
-            createFilterDropdown(columnNoUrut, '#NoUrutFilter');
-            var columnNoRegistrasi = this.api().column(2);
-            createFilterDropdown(columnNoRegistrasi, '#noRegistrasiFilter');
-
-            var columnKategori = this.api().column(3, { order: 'index' });
-            createFilterDropdown(columnKategori, '#kategoriFilter', 'kategorimesin.nama_kategori');
-
-            var columnKlasifikasi = this.api().column(4, { order: 'index' });
-            createFilterDropdown(columnKlasifikasi, '#klasifikasiFilter', 'klasmesin.nama_klasifikasi');
-
-            var columnNamaMesin = this.api().column(5);
-            createFilterDropdown(columnNamaMesin, '#NamaMesinFilter');
-
-            var columnType = this.api().column(6);
-            createFilterDropdown(columnType, '#TypeFilter');
-
-            var columnMerk = this.api().column(7);
-            createFilterDropdown(columnMerk, '#MerkFilter');
-
-            var columnSpek = this.api().column(7);
-            createFilterDropdown(columnSpek, '#SpekFilter');
-
-            var columnPabrik = this.api().column(9);
-            createFilterDropdown(columnPabrik, '#PabrikFilter');
-
-            var columnKapasitas = this.api().column(10);
-            createFilterDropdown(columnKapasitas, '#KapasitasFilter');
-
-            var columnTahun = this.api().column(11);
-            createFilterDropdown(columnTahun, '#TahunFilter');
-
-            var columnLokasi = this.api().column(12);
-            createFilterDropdown(columnLokasi, '#LokasiFilter');
-        }
-    });
-
-    function createFilterDropdown(column, containerId, columnData) {
-        var container = $(containerId);
-        var select = $('<select><option value="">--Silahkan Pilih--</option></select>')
-            .appendTo(container)
-            .on('change', function () {
-                var val = $.fn.dataTable.util.escapeRegex(
-                    $(this).val()
-                );
-
-                column
-                    .search(val ? '^' + val + '$' : '', true, false)
-                    .draw();
             });
 
-        column.data().unique().sort().each(function (d, j) {
-            select.append('<option value="' + d + '">' + d + '</option>')
+            function createFilterDropdown(column, containerId, columnData) {
+                var container = $(containerId);
+                var select = $('<select><option value="">--Silahkan Pilih--</option></select>')
+                    .appendTo(container)
+                    .on('change', function() {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+
+                        column
+                            .search(val ? '^' + val + '$' : '', true, false)
+                            .draw();
+                    });
+
+                column.data().unique().sort().each(function(d, j) {
+                    select.append('<option value="' + d + '">' + d + '</option>')
+                });
+
+                if (columnData) {
+                    select.on('change', function() {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+
+                        column
+                            .search(val ? '^' + val + '$' : '', true, false)
+                            .draw();
+                    });
+                }
+            }
+
+            $('#resetFilterBtn').on('click', function() {
+                table.columns().search('').draw();
+            });
         });
-
-        if (columnData) {
-            select.on('change', function () {
-                var val = $.fn.dataTable.util.escapeRegex(
-                    $(this).val()
-                );
-
-                column
-                    .search(val ? '^' + val + '$' : '', true, false)
-                    .draw();
-            });
-        }
-    }
-
-    $('#resetFilterBtn').on('click', function () {
-        table.columns().search('').draw();
-    });
-});
 
 
         // Fungsi konfirmasi hapus dengan modal
@@ -456,13 +459,13 @@ $(document).ready(function () {
         }
     </script>
     <script>
-    $(document).ready(function() {
-        $('#data1').select2();
-        $('#data2').select2();
-        $('#data3').select2();
+        $(document).ready(function() {
+            $('#data1').select2();
+            $('#data2').select2();
+            $('#data3').select2();
 
-    });
-</script>
+        });
+    </script>
     <style>
         .dataTables_filter input {
             width: 300px;

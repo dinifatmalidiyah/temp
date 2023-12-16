@@ -29,18 +29,9 @@ class DataMesinController extends Controller
 
     public function index()
     {
-        $dataMesin = DataMesin::select('datamesin.*', 'kategorimesin.nama_kategori', 'klasmesin.nama_klasifikasi')
-            ->join('klasmesin', 'datamesin.klas_mesin', '=', 'klasmesin.id')
-            ->join('kategorimesin', 'datamesin.nama_kategori', '=', 'kategorimesin.id')
-            ->orderBy('datamesin.nama_mesin', 'asc')
-            ->get();
-
-        $nama_mesin = DataMesin::pluck('nama_mesin', 'id');
-
-        return view('mesin.index', [
-            'datamesin' => $dataMesin,
-            'nama_mesin' => $nama_mesin,
-        ]);
+        $kategori = KategoriMesin::all();
+        $klasifikasi = KlasMesin::all();
+        return view('mesin.index', compact('kategori', 'klasifikasi'));
     }
 
 
@@ -314,6 +305,7 @@ class DataMesinController extends Controller
         return redirect('/data-mesin')->with('success', 'Data sudah direset!');
     }
 
+
     public function getDataMesin()
     {
         $dataMesin = DataMesin::with('kategori', 'klasifikasi')
@@ -323,8 +315,13 @@ class DataMesinController extends Controller
             ->addColumn('DT_RowIndex', function ($data) {
                 return $data->id;
             })
+            ->addColumn('nama_kategori', function ($data) {
+                return $data->kategori->nama_kategori;
+            })
+            ->addColumn('nama_klasifikasi', function ($data) {
+                return $data->klasifikasi->nama_klasifikasi;
+            })
             ->addColumn('action', function ($data) {
-                // Add any additional columns or formatting as needed
                 return '<button>Edit</button>';
             })
             ->filter(function ($query) {
@@ -350,28 +347,5 @@ class DataMesinController extends Controller
             });
 
         return $datatables->make(true);
-    }
-    public function getfilter()
-    {
-        $hasil = Datamesin::select(
-            'datamesin.*',
-            'kategorimesin.nama_kategori AS kategori_nama',
-            'klasmesin.nama_klasifikasi AS klasifikasi_nama'
-        )
-            ->leftJoin('kategorimesin', 'datamesin.nama_kategori', '=', 'kategorimesin.id')
-            ->leftJoin('klasmesin', 'datamesin.klas_mesin', '=', 'klasmesin.id')
-            ->where('kategorimesin.nama_kategori', 'mesin utama')
-            ->orderBy('kategori_nama', 'asc')
-            ->get();
-
-        // Lakukan sesuatu dengan $hasil, seperti mengirimkannya ke view
-        return view('mesin.index', compact('hasil'));
-    }
-    public function hasilfilter()
-    {
-        $hasil = Datamesin::getDataWithJoin();
-
-        // Lakukan sesuatu dengan $hasil, seperti mengirimkannya ke view
-        return view('mesin.index', compact('hasil'));
     }
 }

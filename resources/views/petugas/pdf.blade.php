@@ -1,9 +1,60 @@
-@extends('petugas.layout')
 <!DOCTYPE html>
 <html>
 
 <head>
 	<title>Laporan Data</title>
+	<style>
+		/* Common styles for both screen and print */
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
+		.header {
+			background-color: #f1f1f1;
+			padding: 10px;
+			text-align: center;
+		}
+
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		td,
+		th {
+			border: 1px solid;
+			padding-left: 5px;
+			text-align: center;
+		}
+
+		.judul {
+			text-align: center;
+		}
+
+		.headtext {
+			float: right;
+			margin-left: 0px;
+			width: 75%;
+			padding-left: 0px;
+			padding-right: 10%;
+		}
+
+		.headtext {
+			float: right;
+			margin-left: 0px;
+			width: 75%;
+			padding-left: 0px;
+			padding-right: 10%;
+		}
+
+		hr {
+			margin-top: 10%;
+			height: 3px;
+			background-color: black;
+		}
+	</style>
 </head>
 
 <body>
@@ -13,11 +64,11 @@
 		</div>
 	</div>
 	<center>
-		<h5>DAFTAR PETUGAS</h4>
-			<h5>Laporan Data Petugas</h4>
+		<h5>DAFTAR PETUGAS</h5>
+		<h5>Laporan Data Petugas</h5>
 	</center>
 
-	<table class="table table-bordered 2px" style="text-align:center;">
+	<table class="table table-bordered 2px">
 		<thead>
 			<tr>
 				<th>No</th>
@@ -37,7 +88,6 @@
 			@endforeach
 		</tbody>
 	</table>
-
 </body>
 
 </html>

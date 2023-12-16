@@ -226,7 +226,6 @@ Route::get('users/data', 'UserController@getData')->name('users.data');
 Route::get('/mesin', [DataMesinController::class, 'index'])->name('mesin.index');
 Route::get('/mesin/data', [DataMesinController::class, 'getDataMesin'])->name('mesin.data');
 
-
 Route::resource('/datapetugas', UserController::class)->middleware(['auth', 'isAdmin']);
 Route::get('/petugas/pdf', [UserController::class, 'cetak_pdf']);
 Route::resource('/datamesin', DataBukuController::class);

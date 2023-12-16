@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Plant;
+use App\Models\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithUpserts;
@@ -14,18 +14,21 @@ class UserExport implements FromCollection, WithHeadings
      */
     public function collection()
     {
-        $plants = Plant::all(['nama_plant']);
+        $users = User::all(['nama', 'nik', 'plant', 'departemen']);
 
         // Tambahkan nomor urut pada setiap baris data
-        $numberedPlants = $plants->map(function ($plant, $index) {
+        $numberedUsers = $users->map(function ($user, $index) {
             return [
                 'No.' => $index + 1,
-                'Nama Plant' => $plant->nama_plant,
+                'Nik' => $user->nik,
+                'Nama Lengkap' => $user->nama,
+                'Plant' => $user->plant,
+                'Departemen' => $user->departemen,
                 // ... (tambahkan kolom lain jika diperlukan)
             ];
         });
 
-        return $numberedPlants;
+        return $numberedUsers;
     }
 
     /**
@@ -36,14 +39,17 @@ class UserExport implements FromCollection, WithHeadings
         // Tentukan nama kolom (header) yang diinginkan
         return [
             'No.',
-            'Nama Plant',
+            'Nik',
+            'Nama Lengkap',
+            'Plant',
+            'Departemen',
             // ... (tambahkan kolom lain jika diperlukan)
         ];
     }
     public function model(array $row)
     {
-        return Plant::updateOrInsert(
-            ['nama_plant' => $row['nama_plant']]
+        return User::updateOrInsert(
+            ['nama' => $row['nama']]
         );
     }
 }

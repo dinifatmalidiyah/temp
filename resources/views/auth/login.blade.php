@@ -32,7 +32,7 @@
                                     <input class="form-control" type="nik" id="emailaddress" required="" placeholder="Masukkan NIK" name="nik" value="{{ old('nik') }}" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 7)" maxlength="7" required>
                                     @error('nik')
                                     <a class="alert alert-danger" role="alert">
-                                        <strong>Email/Password Yang Anda Masukkan Salah!</strong>
+                                        <strong>Nik/Password Yang Anda Masukkan Salah!</strong>
                                     </a>
                                     @enderror
                                 </div>
